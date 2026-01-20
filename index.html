@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nabil — Creative Developer</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --text-idle: #ffffff;
+      --active: #c8a27a;
+      --extrusion: #d5bdaf;
+      --outline: #b08968;
+      --shadow: rgba(127, 85, 57, 0.3);
+      --gray: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* BACKGROUND */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(200, 162, 122, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(200, 162, 122, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      animation: bgShift 15s ease-in-out infinite;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(200, 162, 122, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 162, 122, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    /* HEADER */
+    .header {
+      position: fixed;
+      top: 5vh;
+      left: 5vw;
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--active);
+      opacity: 0;
+      animation: fadeInDown 1s ease 0.5s forwards;
+      z-index: 100;
+    }
+
+    /* TOP NAV */
+    .top-nav {
+      position: fixed;
+      top: 5vh;
+      right: 5vw;
+      display: flex;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeInDown 1s ease 0.7s forwards;
+      z-index: 100;
+    }
+
+    .nav-link {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--active);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--active);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MAIN STAGE */
+    .stage {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      perspective: 1200px;
+      overflow: hidden;
+    }
+
+    .stack {
+      position: absolute;
+      top: 50%;
+      left: 8vw;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .word-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+      justify-content: flex-start;
+      opacity: 0;
+      transform: translateY(60px);
+      animation: wordAppear 0.8s cubic-bezier(0.19,1,0.22,1) forwards;
+    }
+
+    .word-wrapper:nth-child(1) { animation-delay: 0.3s; }
+    .word-wrapper:nth-child(2) { animation-delay: 0.5s; }
+    .word-wrapper:nth-child(3) { animation-delay: 0.7s; }
+    .word-wrapper:nth-child(4) { animation-delay: 0.9s; }
+    .word-wrapper:nth-child(5) { animation-delay: 1.1s; }
+
+    @keyframes wordAppear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* NUMBER */
+    .word-number {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--active);
+      opacity: 0;
+      pointer-events: auto;
+      transition: all 0.6s cubic-bezier(0.19,1,0.22,1);
+      min-width: 3rem;
+      text-align: right;
+      animation: numberFade 0.8s ease forwards;
+    }
+
+    .word-wrapper:nth-child(1) .word-number { animation-delay: 0.5s; }
+    .word-wrapper:nth-child(2) .word-number { animation-delay: 0.7s; }
+    .word-wrapper:nth-child(3) .word-number { animation-delay: 0.9s; }
+    .word-wrapper:nth-child(4) .word-number { animation-delay: 1.1s; }
+    .word-wrapper:nth-child(5) .word-number { animation-delay: 1.3s; }
+
+    @keyframes numberFade {
+      to { opacity: 1; }
+    }
+
+    .word-wrapper:hover .word-number {
+      transform: translateX(5px);
+      letter-spacing: 0.05em;
+    }
+
+    /* WORD CONTAINER */
+    .word-container {
+      position: relative;
+      display: inline-block;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* IDLE STATE: Mundur sedikit */
+    .word-container {
+      transform: perspective(1200px) translateZ(-30px) rotateY(0deg);
+    }
+
+    /* HOVER STATE: Maju ke depan + rotasi kanan */
+    .word-wrapper:hover .word-container {
+      transform: perspective(1200px) translateZ(80px) rotateY(8deg);
+    }
+
+    /* WORD - IDLE STATE */
+    .word {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 900;
+      line-height: 0.9;
+      color: var(--text-idle);
+      cursor: pointer;
+      pointer-events: auto;
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+      
+      /* OUTLINE KOTAK TIPIS - IDLE */
+      -webkit-text-stroke: 1.5px var(--outline);
+      text-stroke: 1.5px var(--outline);
+      
+      /* NO EXTRUSION - IDLE */
+      text-shadow: none;
+      
+      transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* WORD - HOVER STATE */
+    .word-wrapper:hover .word {
+      color: var(--text-idle);
+      -webkit-text-stroke: 0px transparent;
+      text-stroke: 0px transparent;
+      
+      /* RIGHT-SIDE EXTRUSION */
+      text-shadow:
+        1px 0 0 var(--extrusion),
+        2px 0 0 var(--extrusion),
+        3px 0 0 var(--extrusion),
+        4px 0 0 var(--extrusion),
+        5px 0 0 var(--extrusion),
+        6px 0 0 var(--extrusion),
+        7px 0 0 var(--extrusion),
+        8px 0 0 var(--extrusion),
+        9px 0 0 var(--extrusion),
+        10px 0 0 var(--extrusion),
+        11px 0 0 var(--extrusion),
+        12px 0 0 var(--extrusion),
+        13px 0 0 var(--extrusion),
+        14px 0 0 var(--extrusion),
+        15px 0 0 var(--extrusion),
+        16px 2px 0 var(--extrusion),
+        17px 3px 0 var(--extrusion),
+        18px 4px 0 var(--extrusion),
+        19px 5px 0 var(--extrusion),
+        20px 6px 0 var(--extrusion),
+        /* Shadow layer */
+        22px 8px 12px var(--shadow),
+        24px 10px 20px var(--shadow);
+    }
+
+    /* UNDERLINE EFFECT */
+    .word::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background: var(--active);
+      transition: width 0.6s cubic-bezier(0.19,1,0.22,1);
+    }
+
+    .word-wrapper:hover .word::after {
+      width: 100%;
+    }
+
+    /* SUBTITLE */
+    .word-subtitle {
+      position: absolute;
+      bottom: -2.5rem;
+      left: 0;
+      font-size: clamp(0.7rem, 1.2vw, 1rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--gray);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .word-wrapper:hover .word-subtitle {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* PARTICLE EFFECT */
+    .particle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--active);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      animation: particleBurst 1.2s ease-out forwards;
+      box-shadow: 0 0 10px rgba(200, 162, 122, 0.5);
+    }
+
+    @keyframes particleBurst {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .stack {
+        width: 90vw;
+        left: 5vw;
+      }
+
+      .word-wrapper {
+        justify-content: flex-start;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .word {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+
+      .word-number {
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+        min-width: 2rem;
+      }
+
+      .header {
+        top: 3vh;
+        left: 5vw;
+        font-size: 0.7rem;
+      }
+
+      .top-nav {
+        top: 3vh;
+        right: 5vw;
+        gap: 1rem;
+      }
+
+      .nav-link {
+        font-size: 0.65rem;
+      }
+
+      .word-subtitle {
+        font-size: 0.7rem;
+        bottom: -1.8rem;
+      }
+
+      /* Disable 3D on mobile */
+      .word-container {
+        transform: none !important;
+      }
+
+      .word-wrapper:hover .word {
+        text-shadow: none;
+        -webkit-text-stroke: 1.5px var(--outline);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Portfolio 2025</div>
+
+  <nav class="top-nav">
+    <a href="contact.html" class="nav-link">Resume</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link">GitHub</a>
+  </nav>
+
+  <div class="stage">
+    <div class="stack">
+      <div class="word-wrapper">
+        <span class="word-number">01</span>
+        <div>
+          <a href="home.html" style="text-decoration: none; color: inherit;">
+            <div class="word-container">
+              <div class="word">HOME</div>
+            </div>
+          </a>
+          <div class="word-subtitle">Discover my journey</div>
+        </div>
+      </div>
+
+      <div class="word-wrapper">
+        <span class="word-number">02</span>
+        <div>
+          <a href="about.html" style="text-decoration: none; color: inherit;">
+            <div class="word-container">
+              <div class="word">ABOUT</div>
+            </div>
+          </a>
+          <div class="word-subtitle">Who I am & what I do</div>
+        </div>
+      </div>
+
+      <div class="word-wrapper">
+        <span class="word-number">03</span>
+        <div>
+          <a href="/projects.html" style="text-decoration: none; color: inherit;">
+            <div class="word-container">
+              <div class="word">PROJECTS</div>
+            </div>
+          </a>
+          <div class="word-subtitle">Featured works & case studies</div>
+        </div>
+      </div>
+
+      <div class="word-wrapper">
+        <span class="word-number">04</span>
+        <div>
+          <a href="skills.html" style="text-decoration: none; color: inherit;">
+            <div class="word-container">
+              <div class="word">SKILLS</div>
+            </div>
+          </a>
+          <div class="word-subtitle">Technologies & expertise</div>
+        </div>
+      </div>
+
+      <div class="word-wrapper">
+        <span class="word-number">05</span>
+        <div>
+          <a href="contact.html" style="text-decoration: none; color: inherit;">
+            <div class="word-container">
+              <div class="word">CONTACT</div>
+            </div>
+          </a>
+          <div class="word-subtitle">Let's work together</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const wordContainers = document.querySelectorAll('.word-container');
+    const words = document.querySelectorAll('.word');
+
+    // Particle effect on click
+    function createParticles(x, y) {
+      const particleCount = 15;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const angle = (Math.PI * 2 * i) / particleCount;
+        const velocity = 100 + Math.random() * 50;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+        
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 1200);
+      }
+    }
+
+    words.forEach(word => {
+      word.addEventListener('click', (e) => {
+        const rect = word.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        createParticles(x, y);
+      });
+    });
+
+    // Enhanced mouse move interaction
+    wordContainers.forEach((container, index) => {
+      const wrapper = container.closest('.word-wrapper');
+      
+      wrapper.addEventListener('mousemove', (e) => {
+        if (window.innerWidth <= 768) return;
+        
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const width = rect.width;
+        
+        // Rotasi hanya ke kanan (0 sampai 12 derajat)
+        const rotateY = (mouseX / width) * 12;
+        
+        // Sedikit rotasi X untuk depth
+        const rotateX = -3;
+        
+        container.style.transform = `
+          perspective(1200px) 
+          translateZ(80px) 
+          rotateX(${rotateX}deg) 
+          rotateY(${rotateY}deg)
+        `;
+      });
+      
+      wrapper.addEventListener('mouseleave', () => {
+        if (window.innerWidth <= 768) return;
+        
+        // Reset to hover state base
+        container.style.transform = 'perspective(1200px) translateZ(80px) rotateY(8deg)';
+        
+        // Then smooth return to idle
+        setTimeout(() => {
+          container.style.transform = 'perspective(1200px) translateZ(-30px) rotateY(0deg)';
+        }, 50);
+      });
+    });
+  </script>
+
+</body>
+</html>

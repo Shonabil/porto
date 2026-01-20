@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Nabil</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --active: #c8a27a;
+      --accent: #e8d5c0;
+      --gray: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ANIMATED BACKGROUND */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(200, 162, 122, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(200, 162, 122, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      animation: bgShift 15s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    /* GRID PATTERN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(200, 162, 122, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 162, 122, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    /* TOP NAVIGATION */
+    .top-nav {
+      position: fixed;
+      top: 5vh;
+      right: 5vw;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeInDown 1s ease 0.5s forwards;
+      z-index: 100;
+    }
+
+    .back-btn {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--active);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--active);
+    }
+
+    .back-btn:hover {
+      background: transparent;
+      color: var(--active);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(200, 162, 122, 0.3);
+    }
+
+    .nav-link {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--active);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--active);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15vh 8vw 10vh;
+      z-index: 1;
+    }
+
+    .page-title {
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.8s forwards;
+      text-shadow: 
+        2px 2px 0 rgba(0,0,0,0.1),
+        4px 4px 0 rgba(0,0,0,0.08),
+        6px 6px 0 rgba(0,0,0,0.06),
+        8px 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .page-number {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 700;
+      color: var(--active);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.6s forwards;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 4rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 1s forwards;
+    }
+
+    .content-section {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .content-section:nth-child(1) { animation-delay: 1.2s; }
+    .content-section:nth-child(2) { animation-delay: 1.4s; }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--active);
+    }
+
+    .text-block {
+      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+      line-height: 1.8;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .highlight {
+      color: var(--active);
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(200, 162, 122, 0.05);
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      background: rgba(200, 162, 122, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: var(--active);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      font-weight: 500;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* DECORATIVE NUMBER */
+    .number-deco {
+      position: fixed;
+      bottom: 5vh;
+      right: 5vw;
+      font-size: clamp(8rem, 15vw, 12rem);
+      font-weight: 900;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .container {
+        padding: 12vh 5vw 5vh;
+      }
+
+      .top-nav {
+        top: 3vh;
+        right: 5vw;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .back-btn {
+        font-size: 0.65rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .nav-link {
+        font-size: 0.65rem;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .number-deco {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Menu</a>
+    <a href="contact.html" class="nav-link">Resume</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link">GitHub</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-number">02 — ABOUT</div>
+    <h1 class="page-title">WHO I AM</h1>
+
+    <div class="content-grid">
+      <div class="content-section">
+        <h2 class="section-title">My Story</h2>
+        <p class="text-block">
+          I'm a <span class="highlight">passionate web developer</span> with a keen eye for design and a love for creating seamless digital experiences. My journey in web development started from curiosity and grew into a full-fledged career.
+        </p>
+        <p class="text-block">
+          I believe in <span class="highlight">continuous learning</span> and staying updated with the latest technologies. Every project is an opportunity to push boundaries and deliver exceptional results.
+        </p>
+      </div>
+
+      <div class="content-section">
+        <h2 class="section-title">What I Do</h2>
+        <p class="text-block">
+          I specialize in building <span class="highlight">modern, responsive websites</span> and web applications. From concept to deployment, I handle every aspect of the development process with precision and creativity.
+        </p>
+        <p class="text-block">
+          My approach combines <span class="highlight">technical expertise</span> with design sensibility, ensuring that every project not only works flawlessly but also looks stunning.
+        </p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Commitment</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="number-deco">02</div>
+
+</body>
+</html>

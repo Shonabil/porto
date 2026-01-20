@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills — Nabil</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --active: #c8a27a;
+      --accent: #e8d5c0;
+      --gray: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ANIMATED BACKGROUND */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(200, 162, 122, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(200, 162, 122, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      animation: bgShift 15s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    /* GRID PATTERN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(200, 162, 122, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 162, 122, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    /* TOP NAVIGATION */
+    .top-nav {
+      position: fixed;
+      top: 5vh;
+      right: 5vw;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeInDown 1s ease 0.5s forwards;
+      z-index: 100;
+    }
+
+    .back-btn {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--active);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--active);
+    }
+
+    .back-btn:hover {
+      background: transparent;
+      color: var(--active);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(200, 162, 122, 0.3);
+    }
+
+    .nav-link {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--active);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--active);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15vh 8vw 10vh;
+      z-index: 1;
+    }
+
+    .page-title {
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.8s forwards;
+      text-shadow: 
+        2px 2px 0 rgba(0,0,0,0.1),
+        4px 4px 0 rgba(0,0,0,0.08),
+        6px 6px 0 rgba(0,0,0,0.06),
+        8px 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .page-number {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 700;
+      color: var(--active);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.6s forwards;
+    }
+
+    .skills-container {
+      margin-top: 4rem;
+    }
+
+    .skill-category {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .skill-category:nth-child(1) { animation-delay: 1s; }
+    .skill-category:nth-child(2) { animation-delay: 1.2s; }
+    .skill-category:nth-child(3) { animation-delay: 1.4s; }
+
+    .category-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .category-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--active);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-item {
+      background: rgba(200, 162, 122, 0.03);
+      border: 1px solid rgba(200, 162, 122, 0.1);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .skill-item:hover {
+      background: rgba(200, 162, 122, 0.08);
+      border-color: var(--active);
+      transform: translateY(-5px);
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .skill-level {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--active);
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(200, 162, 122, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--active) 0%, var(--accent) 100%);
+      border-radius: 10px;
+      transition: width 1.5s cubic-bezier(0.19,1,0.22,1);
+      width: 0;
+    }
+
+    .skill-item:hover .skill-progress {
+      background: linear-gradient(90deg, var(--active) 0%, #d4a574 100%);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* DECORATIVE NUMBER */
+    .number-deco {
+      position: fixed;
+      bottom: 5vh;
+      right: 5vw;
+      font-size: clamp(8rem, 15vw, 12rem);
+      font-weight: 900;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .container {
+        padding: 12vh 5vw 5vh;
+      }
+
+      .top-nav {
+        top: 3vh;
+        right: 5vw;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .back-btn {
+        font-size: 0.65rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .nav-link {
+        font-size: 0.65rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .number-deco {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Menu</a>
+    <a href="contact.html" class="nav-link">Resume</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link">GitHub</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-number">04 — SKILLS</div>
+    <h1 class="page-title">EXPERTISE</h1>
+
+    <div class="skills-container">
+      <div class="skill-category">
+        <h2 class="category-title">SKILLS</h2>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">HTML & CSS</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">JavaScript</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">tailwind</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Laravel</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">MySQL</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">PHP</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Git & GitHub</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">Flutter</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">REST APIs</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">API Development</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="number-deco">04</div>
+
+  <script>
+    // Animate skill bars on scroll
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const progressBars = entry.target.querySelectorAll('.skill-progress');
+          progressBars.forEach(bar => {
+            const progress = bar.getAttribute('data-progress');
+            setTimeout(() => {
+              bar.style.width = progress + '%';
+            }, 200);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-category').forEach(category => {
+      observer.observe(category);
+    });
+  </script>
+
+</body>
+</html>
