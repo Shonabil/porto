@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>404 — Nabil</title>
+  <meta name="description" content="Page not found — the page you are looking for does not exist. Return to the portfolio of Muhammad Syafwan Nabil." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #666666;
+      --active: #c8a27a;
+      --active-glow: rgba(200,162,122,0.2);
+      --active-dim: rgba(200,162,122,0.08);
+      --border: rgba(0,0,0,0.08);
+    }
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60vw 50vh at 50% 30%, rgba(200,162,122,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50vw 40vh at 90% 80%, rgba(200,162,122,0.04) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,162,122,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,162,122,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    .nav {
+      position: fixed; top: 5vh; right: 5vw; z-index: 100;
+      display: flex; gap: 2rem; align-items: center;
+      opacity: 0; animation: fadeDown 0.8s ease 0.4s forwards;
+    }
+    .nav-link {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      position: relative; transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--active);
+      transition: width 0.35s ease;
+    }
+    .nav-link:hover { color: var(--active); }
+    .nav-link:hover::after { width: 100%; }
+
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(40px)}  to{opacity:1;transform:translateY(0)} }
+    @keyframes float    { 0%,100%{transform:translate(-50%,-50%)} 50%{transform:translate(-50%,-54%)} }
+
+    .main {
+      position: relative; z-index: 1;
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 12vh 8vw;
+      text-align: center;
+    }
+    .wrap { max-width: 640px; }
+
+    .logo-mark {
+      width: 64px; height: 64px;
+      margin: 0 auto 2rem;
+      border-radius: 14px;
+      background: #111111;
+      box-shadow: 0 20px 40px rgba(17,17,17,0.25);
+      display: grid; place-items: center;
+      opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .logo-letter {
+      font-size: 34px; font-weight: 800; line-height: 1;
+      color: #c8a27a; font-family: 'Inter', system-ui, sans-serif;
+    }
+    .logo-letter .dot { color: #ffffff; }
+
+    .code {
+      font-size: clamp(7rem, 22vw, 16rem);
+      font-weight: 900; line-height: 1; letter-spacing: -0.02em;
+      background: linear-gradient(120deg, var(--text) 0%, #555 45%, var(--active) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .title {
+      font-size: clamp(1rem, 2.4vw, 1.5rem);
+      font-weight: 800; letter-spacing: 0.02em;
+      margin-top: 1rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+    .desc {
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      color: var(--text-muted); line-height: 1.8;
+      margin-top: 1rem; max-width: 42ch; margin-inline: auto;
+      opacity: 0; animation: fadeUp 0.8s ease 0.85s forwards;
+    }
+    .actions {
+      display: flex; gap: 0.9rem; justify-content: center;
+      margin-top: 2.4rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      text-decoration: none; padding: 0.75rem 1.6rem;
+      border-radius: 3px; border: 1.5px solid var(--active);
+      transition: all 0.3s ease;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .btn-solid { background: var(--active); color: #fff; }
+    .btn-solid:hover {
+      background: transparent; color: var(--active);
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
+    }
+    .btn-outline { background: transparent; color: var(--active); }
+    .btn-outline:hover {
+      background: var(--active); color: #fff;
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
+    }
+
+    @media (max-width: 768px) {
+      .nav { top: 3vh; right: 5vw; gap: 1rem; }
+      .main { padding: 14vh 5vw; }
+    }
+  </style>
+  <script src="lang.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-link" data-i18n="n404.home">Home</a>
+    <a href="contact.html" class="nav-link" data-i18n="n404.contact">Contact</a>
+  </nav>
+
+  <main class="main">
+    <div class="wrap">
+      <div class="logo-mark" aria-label="Nabil logo">
+        <span class="logo-letter">N<span class="dot">.</span></span>
+      </div>
+      <div class="code">404</div>
+      <h1 class="title" data-i18n="n404.title">Page not found</h1>
+      <p class="desc" data-i18n="n404.desc">
+        The page you are looking for doesn't exist or was moved. Let's get you back on track.
+      </p>
+      <div class="actions">
+        <a href="home.html" class="btn btn-solid" data-i18n="n404.back">Back to Homepage</a>
+        <a href="projects.html" class="btn btn-outline" data-i18n="n404.projects">View Projects</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

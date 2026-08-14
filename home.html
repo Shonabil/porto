@@ -1,394 +1,502 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home — Nabil</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>Home — Nabil</title>
+  <meta name="description" content="Muhammad Syafwan Nabil — Web Developer & Backend Engineer based in Balikpapan, Indonesia." />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <style>
-      :root {
-        --bg: #ffffff;
-        --text: #000000;
-        --active: #c8a27a;
-        --accent: #e8d5c0;
-        --gray: #666666;
-      }
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f7;
+      --text: #111111;
+      --text-muted: #666666;
+      --active: #c8a27a;
+      --active-glow: rgba(200,162,122,0.2);
+      --active-dim: rgba(200,162,122,0.08);
+      --border: rgba(0,0,0,0.1);
+      --green: #4ade80;
+    }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", system-ui, sans-serif;
-      }
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
 
-      body {
-        background: var(--bg);
-        overflow: hidden;
-        height: 100vh;
-        position: relative;
-      }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+    }
 
-      /* ANIMATED BACKGROUND */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background:
-          radial-gradient(
-            circle at 20% 50%,
-            rgba(200, 162, 122, 0.04) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 80%,
-            rgba(200, 162, 122, 0.05) 0%,
-            transparent 50%
-          );
-        pointer-events: none;
-        animation: bgShift 15s ease-in-out infinite;
-        z-index: 0;
-      }
+    /* ── BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 70vw 70vh at 10% 60%, rgba(200,162,122,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50vw 50vh at 85% 20%, rgba(200,162,122,0.04) 0%, transparent 55%);
+      pointer-events: none;
+      animation: bgPulse 10s ease-in-out infinite;
+      z-index: 0;
+    }
+    @keyframes bgPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
 
-      @keyframes bgShift {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.7;
-          transform: scale(1.1);
-        }
-      }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,162,122,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,162,122,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
 
-      /* GRID PATTERN */
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(200, 162, 122, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(200, 162, 122, 0.03) 1px, transparent 1px);
-        background-size: 50px 50px;
-        pointer-events: none;
-        opacity: 0.5;
-        z-index: 0;
-      }
+    /* ── NAV ── */
+    .top-nav {
+      position: fixed; top: 5vh; right: 5vw;
+      display: flex; gap: 2rem; align-items: center;
+      opacity: 0; animation: fadeDown 0.8s ease 0.4s forwards;
+      z-index: 100;
+    }
+    .back-btn {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--bg); background: var(--active);
+      text-decoration: none; padding: 0.55rem 1.4rem;
+      border-radius: 3px; transition: all 0.3s ease;
+      border: 1.5px solid var(--active);
+    }
+    .back-btn:hover {
+      background: transparent; color: var(--active);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--active-glow);
+    }
+    .nav-link {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      position: relative; transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--active);
+      transition: width 0.35s ease;
+    }
+    .nav-link:hover { color: var(--active); }
+    .nav-link:hover::after { width: 100%; }
 
-      /* TOP NAVIGATION */
-      .top-nav {
-        position: fixed;
-        top: 5vh;
-        right: 5vw;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        opacity: 0;
-        animation: fadeInDown 1s ease 0.5s forwards;
-        z-index: 100;
-      }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
 
-      .back-btn {
-        font-size: clamp(0.7rem, 1vw, 0.85rem);
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--bg);
-        background: var(--active);
-        text-decoration: none;
-        padding: 0.6rem 1.5rem;
-        border-radius: 3px;
-        transition: all 0.3s ease;
-        border: 2px solid var(--active);
-      }
+    /* ── MAIN CONTAINER ── */
+    .container {
+      position: fixed; inset: 0;
+      display: flex; align-items: center;
+      padding-left: 8vw;
+      z-index: 1;
+    }
 
-      .back-btn:hover {
-        background: transparent;
-        color: var(--active);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(200, 162, 122, 0.3);
-      }
+    .content {
+      max-width: 780px;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
 
-      .nav-link {
-        font-size: clamp(0.7rem, 1vw, 0.85rem);
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--gray);
-        text-decoration: none;
-        position: relative;
-        transition: color 0.3s ease;
-      }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
 
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: var(--active);
-        transition: width 0.3s ease;
-      }
+    /* ── GREETING ── */
+    .greeting {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .greeting-line {
+      width: 28px; height: 1px; background: var(--active);
+    }
+    .greeting-text {
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--active);
+    }
 
-      .nav-link:hover {
-        color: var(--active);
-      }
+    /* ── TITLE ── */
+    .title {
+      font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+      font-weight: 900; line-height: 0.95;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .title .accent { color: var(--active); }
 
-      .nav-link:hover::after {
-        width: 100%;
-      }
+    /* ── ROLE TYPING ── */
+    .role-wrapper {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 2rem;
+    }
+    .role-label {
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      font-weight: 300; color: var(--text-muted);
+    }
+    .role-text {
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      font-weight: 700; color: var(--active);
+      position: relative;
+    }
+    .role-text::after {
+      content: '|';
+      animation: blink 0.9s step-end infinite;
+      color: var(--active);
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-      @keyframes fadeInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+    /* ── DESCRIPTION ── */
+    .description {
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+      font-weight: 400; color: var(--text-muted);
+      line-height: 1.8; max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    .description .hl { color: var(--text); font-weight: 500; }
 
-      /* MAIN CONTENT */
-      .container {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        padding-left: 8vw;
-        perspective: 1000px;
-        z-index: 1;
-      }
+    /* ── QUICK STATS ── */
+    .stats-row {
+      display: flex; gap: 2rem; margin-bottom: 2.8rem;
+    }
+    .stat {
+      position: relative;
+    }
+    .stat-num {
+      font-size: 1.8rem; font-weight: 900; color: var(--text);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--active); }
+    .stat-label {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .stat-divider {
+      width: 1px; background: rgba(0,0,0,0.12); align-self: stretch;
+    }
 
-      .content {
-        max-width: 800px;
-        opacity: 0;
-        animation: fadeInUp 1s ease 0.8s forwards;
-      }
+    /* ── BUTTONS ── */
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-      .greeting {
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        font-weight: 500;
-        color: var(--active);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-      }
+    .btn {
+      padding: 0.9rem 2.2rem;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px;
+      cursor: pointer; transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
+      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary {
+      background: var(--active); color: var(--bg);
+      border: 1.5px solid var(--active);
+    }
+    .btn-primary:hover {
+      background: transparent; color: var(--active);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px var(--active-glow);
+    }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1.5px solid rgba(0,0,0,0.2);
+    }
+    .btn-secondary:hover {
+      border-color: var(--active); color: var(--active);
+      transform: translateY(-3px);
+    }
+    .btn-arrow { transition: transform 0.3s ease; }
+    .btn:hover .btn-arrow { transform: translateX(4px); }
 
-      .title {
-        font-size: clamp(3rem, 8vw, 6rem);
-        font-weight: 900;
-        line-height: 1;
-        color: var(--text);
-        margin-bottom: 1.5rem;
-        text-shadow:
-          2px 2px 0 rgba(0, 0, 0, 0.1),
-          4px 4px 0 rgba(0, 0, 0, 0.08),
-          6px 6px 0 rgba(0, 0, 0, 0.06),
-          8px 8px 20px rgba(0, 0, 0, 0.15);
-      }
+    /* ── DECO NUMBER ── */
+    .number-deco {
+      position: fixed; bottom: 5vh; right: 5vw;
+      font-size: clamp(7rem, 14vw, 11rem); font-weight: 900;
+      color: transparent; -webkit-text-stroke: 1px rgba(200,162,122,0.08);
+      line-height: 1; pointer-events: none; z-index: 0;
+      user-select: none;
+    }
 
-      .title span {
-        color: var(--active);
-      }
+    /* ── SIDE INFO ── */
+    .side-info {
+      position: fixed; left: 2.5vw; top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center center;
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-muted); pointer-events: none;
+      z-index: 100;
+      opacity: 0; animation: fadeDown 0.8s ease 1.4s forwards;
+    }
 
-      .subtitle {
-        font-size: clamp(1.2rem, 3vw, 2rem);
-        font-weight: 700;
-        color: var(--active);
-        margin-bottom: 2rem;
-        line-height: 1.4;
-      }
+    /* ── RIGHT PROFILE CARD ── */
+    .home-profile {
+      position: fixed;
+      right: 6vw;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      opacity: 0;
+      animation: profileIn 1s cubic-bezier(0.19,1,0.22,1) 1.2s forwards;
+    }
+    @keyframes profileIn {
+      from { opacity: 0; transform: translateY(-46%) scale(0.94); }
+      to   { opacity: 1; transform: translateY(-50%) scale(1); }
+    }
+    .portrait-card {
+      position: relative;
+      width: clamp(230px, 21vw, 310px);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 10px 14px;
+      box-shadow:
+        0 30px 60px rgba(0,0,0,0.14),
+        0 0 0 1px rgba(200,162,122,0.08);
+      transform: rotate(-2deg);
+      transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);
+    }
+    .portrait-card:hover { transform: rotate(0deg) translateY(-6px); }
+    .portrait-photo {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover; object-position: center 18%;
+      display: block; border-radius: 3px;
+      filter: saturate(0.85) contrast(1.02);
+    }
+    .portrait-caption {
+      padding: 0.9rem 0.4rem 0.2rem;
+    }
+    .portrait-name {
+      font-size: 0.82rem; font-weight: 800; color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .portrait-role {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--active); margin-top: 3px;
+    }
+    .portrait-note {
+      margin-top: 0.6rem; padding-top: 0.6rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .portrait-note .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px rgba(74,222,128,0.6);
+    }
+    .profile-sticker {
+      position: absolute;
+      top: -14px; right: -10px;
+      background: #f5e6c2; color: #5a4020;
+      font-size: 0.5rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 9px; border-radius: 2px;
+      box-shadow: 1px 2px 8px rgba(0,0,0,0.18);
+      transform: rotate(4deg); z-index: 2;
+      animation: stickerBob 4s ease-in-out infinite;
+    }
+    @keyframes stickerBob {
+      0%,100% { transform: rotate(4deg) translateY(0); }
+      50%     { transform: rotate(4deg) translateY(-5px); }
+    }
+    .profile-tagline {
+      position: absolute;
+      left: -3rem; top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center;
+      font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text-muted); white-space: nowrap;
+    }
+    .profile-dot-deco {
+      position: absolute; bottom: -24px; left: -24px;
+      width: 44px; height: 44px;
+      background-image: radial-gradient(rgba(200,162,122,0.5) 1.5px, transparent 1.5px);
+      background-size: 8px 8px;
+      opacity: 0.5; pointer-events: none;
+    }
 
-      .description {
-        font-size: clamp(1rem, 1.5vw, 1.1rem);
-        font-weight: 400;
-        color: var(--gray);
-        line-height: 1.8;
-        max-width: 600px;
-        margin-bottom: 3rem;
-      }
+    /* ── 3D STAGE ── */
+    .hero-3d {
+      position: fixed;
+      right: 3vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(310px, 31vw, 450px);
+      height: clamp(310px, 31vw, 450px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      animation: profileIn 1s cubic-bezier(0.19,1,0.22,1) 1.2s forwards;
+    }
+    .hero-3d::before {
+      content: '';
+      position: absolute;
+      inset: -4%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(200,162,122,0.3) 0%, rgba(200,162,122,0.1) 30%, rgba(200,162,122,0.03) 52%, transparent 68%);
+      filter: blur(10px);
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+    .hero-3d::after {
+      content: '';
+      position: absolute;
+      inset: 4%;
+      border-radius: 50%;
+      border: 1px dashed rgba(200,162,122,0.24);
+      animation: ringSpin 24s linear infinite;
+    }
+    .hero-3d .ring-dot {
+      content: '';
+      position: absolute;
+      inset: 13%;
+      border-radius: 50%;
+      border: 1px dashed rgba(200,162,122,0.16);
+      animation: ringSpin 32s linear infinite reverse;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.04); }
+    }
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .hero-3d canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      position: relative;
+    }
 
-      .cta-group {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      body { overflow: auto; height: auto; }
+      .container { position: relative; inset: auto; padding: 22vh 5vw 10vh; align-items: flex-start; display: block; }
+      .top-nav { top: 3vh; right: 5vw; gap: 1rem; }
+      .back-btn { font-size: 0.65rem; padding: 0.45rem 1rem; }
+      .stats-row { gap: 1.2rem; flex-wrap: wrap; }
+      .cta-group { flex-direction: column; }
+      .btn { text-align: center; justify-content: center; }
+      .number-deco { display: none; }
+      .side-info { display: none; }
+      .home-profile { display: none; }
+      .hero-3d { display: none; }
+    }
+  </style>
+  <script src="lang.js" defer></script>
+</head>
+<body>
 
-      .btn {
-        padding: 1rem 2.5rem;
-        font-size: clamp(0.85rem, 1.2vw, 1rem);
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        text-decoration: none;
-        border: 2px solid var(--text);
-        background: var(--text);
-        color: var(--bg);
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        position: relative;
-        overflow: hidden;
-      }
+  <nav class="top-nav">
+    <a href="index.html" class="back-btn">← Menu</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link" target="_blank">GitHub</a>
+  </nav>
 
-      .btn::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: var(--active);
-        transform: translate(-50%, -50%);
-        transition:
-          width 0.6s ease,
-          height 0.6s ease;
-      }
+  <div class="container">
+    <div class="content">
 
-      .btn span {
-        position: relative;
-        z-index: 1;
-      }
+      <div class="greeting">
+        <span class="greeting-line"></span>
+        <span class="greeting-text" data-i18n="home.greeting">Hello, I'm</span>
+      </div>
 
-      .btn:hover::before {
-        width: 300px;
-        height: 300px;
-      }
+      <h1 class="title">
+        Muhammad<br>
+        Syafwan<br>
+        Nabil<span class="accent">.</span>
+      </h1>
 
-      .btn:hover {
-        border-color: var(--active);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(200, 162, 122, 0.3);
-      }
+      <div class="role-wrapper">
+        <span class="role-label" data-i18n="home.role.label">I'm a&nbsp;</span>
+        <span class="role-text" id="roleText">Web Developer</span>
+      </div>
 
-      .btn-secondary {
-        background: transparent;
-        color: var(--text);
-        border-color: var(--text);
-      }
+      <p class="description">
+        <span data-i18n="home.desc">I design and build <span class="hl">reliable, scalable web applications</span> with a strong focus on backend systems — APIs, databases, and clean server-side logic that powers modern user experiences.</span>
+      </p>
 
-      .btn-secondary:hover {
-        background: var(--text);
-        color: var(--bg);
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(60px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* DECORATIVE ELEMENT */
-      .number-deco {
-        position: fixed;
-        bottom: 5vh;
-        right: 5vw;
-        font-size: clamp(8rem, 15vw, 12rem);
-        font-weight: 900;
-        color: var(--accent);
-        opacity: 0.3;
-        line-height: 1;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      /* MOBILE */
-      @media (max-width: 768px) {
-        .container {
-          padding: 0 5vw;
-          align-items: flex-start;
-          padding-top: 20vh;
-        }
-
-        .top-nav {
-          top: 3vh;
-          right: 5vw;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .back-btn {
-          font-size: 0.65rem;
-          padding: 0.5rem 1rem;
-        }
-
-        .nav-link {
-          font-size: 0.65rem;
-        }
-
-        .cta-group {
-          flex-direction: column;
-        }
-
-        .btn {
-          text-align: center;
-          width: 100%;
-        }
-
-        .number-deco {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="top-nav">
-      <a href="index.html" class="back-btn">← Back to Menu</a>
-      <a href="contact.html" class="nav-link">Resume</a>
-      <a
-        href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/"
-        class="nav-link"
-        >LinkedIn</a
-      >
-      <a href="https://github.com/Shonabil" class="nav-link">GitHub</a>
-    </nav>
-
-    <div class="container">
-      <div class="content">
-        <div class="greeting">Hello, I'm</div>
-        <h1 class="title">Muhammad Syafwan Nabil<span>.</span></h1>
-        <h2 class="subtitle">Web Developer & Backend Engineer</h2>
-        <p class="description">
-          I design and develop reliable, scalable web applications with a strong
-          focus on backend systems. Experienced in building APIs, managing
-          databases, and implementing secure, efficient server-side logic to
-          support modern, user-centered web experiences.
-        </p>
-        <div class="cta-group">
-          <a href="/projects.html" class="btn"><span>View My Work</span></a>
-          <a href="/contact.html" class="btn btn-secondary"
-            ><span>Get In Touch</span></a
-          >
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num">8<span>+</span></div>
+          <div class="stat-label" data-i18n="home.stat.projects">Projects</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-num">5<span>th</span></div>
+          <div class="stat-label" data-i18n="home.stat.semester">Semester</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label" data-i18n="home.stat.tech">Technologies</div>
         </div>
       </div>
+
+      <div class="cta-group">
+        <a href="projects.html" class="btn btn-primary">
+          <span data-i18n="home.btn.work">View My Work</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <a href="contact.html" class="btn btn-secondary">
+          <span data-i18n="cta">Get In Touch</span>
+        </a>
+      </div>
+
     </div>
+  </div>
 
-    <div class="number-deco">01</div>
+ 
 
-    <script>
-      // Smooth button ripple effect
-      document.querySelectorAll(".btn").forEach((btn) => {
-        btn.addEventListener("mouseenter", function (e) {
-          const rect = this.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
+  <div class="hero-3d" id="hero-3d" aria-hidden="true"><span class="ring-dot"></span></div>
 
-          this.style.setProperty("--x", x + "px");
-          this.style.setProperty("--y", y + "px");
-        });
-      });
-    </script>
-  </body>
+  <div class="number-deco">01</div>
+
+  <script>
+    // ── Role typing cycle ──
+    let roles = ['Web Developer', 'Backend Engineer', 'Laravel Developer', 'API Builder', 'Problem Solver'];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const roleEl = document.getElementById('roleText');
+
+    function typeRole() {
+      const current = roles[roleIdx];
+      if (!deleting) {
+        roleEl.textContent = current.slice(0, ++charIdx);
+        if (charIdx === current.length) { deleting = true; setTimeout(typeRole, 2200); return; }
+      } else {
+        roleEl.textContent = current.slice(0, --charIdx);
+        if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+      }
+      setTimeout(typeRole, deleting ? 45 : 90);
+    }
+    setTimeout(typeRole, 1800);
+
+    // ── Language change: swap roles ──
+    document.addEventListener('langchange', function (e) {
+      if (e.detail && e.detail.roles) roles = e.detail.roles;
+      roleIdx = 0; charIdx = 0; deleting = false;
+      roleEl.textContent = '';
+      setTimeout(typeRole, 600);
+    });
+  </script>
+
+  <script type="module" src="js/hero3d.js"></script>
+
+</body>
 </html>

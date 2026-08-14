@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
     <title>Weather App — Project Detail</title>
+    <meta name="description" content="Weather Dashboard — real-time weather app with beautiful visualizations, forecasts, and location-based updates using external APIs." />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
@@ -126,36 +128,49 @@
         height: 90vh;
         width: 100%;
         overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 18%, rgba(200,162,122,0.28), transparent 55%),
+          linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .hero-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+      .hero-text-inner {
         position: relative;
-        z-index: 1;
-        animation: slowZoom 20s ease-in-out infinite alternate;
+        z-index: 5;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 0 2rem;
       }
 
-      @keyframes slowZoom {
-        from {
-          transform: scale(1);
-        }
-        to {
-          transform: scale(1.05);
-        }
+      .hero-num {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 900;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(232,213,192,0.7);
+        line-height: 1;
+        letter-spacing: 0.06em;
       }
 
-      .hero::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 40%;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-        z-index: 2;
+      .hero-title {
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: 0.06em;
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .hero-sub {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--active);
       }
 
       .hero-overlay {
@@ -416,124 +431,6 @@
         z-index: 1;
       }
 
-      /* GALLERY */
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-        margin-top: 3rem;
-      }
-
-      .gallery-item {
-        border-radius: 16px;
-        overflow: hidden;
-        aspect-ratio: 16/10;
-        background-color: #eee;
-        position: relative;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: all 0.4s ease;
-        cursor: zoom-in;
-      }
-
-      .gallery-item::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          45deg,
-          rgba(200, 162, 122, 0.3),
-          transparent
-        );
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      .gallery-item:hover::after {
-        opacity: 1;
-      }
-
-      .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        display: block;
-        pointer-events: none;
-      }
-
-      .gallery-item:hover {
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        transform: translateY(-5px);
-      }
-
-      .gallery-item:hover img {
-        transform: scale(1.1);
-      }
-
-      /* LIGHTBOX */
-      .lightbox {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-
-      .lightbox.active {
-        opacity: 1;
-        pointer-events: all;
-        backdrop-filter: blur(5px);
-      }
-
-      .lightbox-img {
-        max-width: 90%;
-        max-height: 90vh;
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-        border: 2px solid #fff;
-        transform: scale(0.9);
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .lightbox.active .lightbox-img {
-        transform: scale(1);
-      }
-
-      .lightbox-close {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        color: #fff;
-        font-size: 3rem;
-        cursor: pointer;
-        font-family: sans-serif;
-        line-height: 1;
-        transition: all 0.3s ease;
-        z-index: 1001;
-        background: rgba(0, 0, 0, 0.2);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .lightbox-close:hover {
-        color: var(--active);
-        background: #fff;
-        transform: rotate(90deg);
-      }
-
       /* CTA SECTION */
       .cta-section {
         background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
@@ -691,11 +588,6 @@
           gap: 2rem;
         }
 
-        .gallery {
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-
         .cta-section {
           padding: 4rem 2rem;
         }
@@ -717,27 +609,23 @@
         }
       }
     </style>
+    <script src="../lang.js" defer></script>
   </head>
   <body>
     <nav class="top-nav" id="navbar">
-      <a href="/projects.html" class="back-btn">← Back to Projects</a>
+      <a href="/projects.html" class="back-btn" data-i18n="ps.back">← Back to Projects</a>
       <div style="display: flex; gap: 1.5rem">
-        <a href="/index.html" class="nav-link">Menu</a>
-        <a href="/contact.html" class="nav-link">Contact</a>
+        <a href="/index.html" class="nav-link" data-i18n="ps.menu">Menu</a>
+        <a href="/contact.html" class="nav-link" data-i18n="ps.contact">Contact</a>
       </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero">
-      <img
-        src="../images/weathermain.png"
-        alt="Weather App Hero"
-        class="hero-image"
-        onerror="this.src = 'https://picsum.photos/seed/weatherhero/1600/900'"
-      />
-
-      <div class="hero-overlay">
-        <div class="project-badge">WEATHER APPLICATION</div>
+      <div class="hero-text-inner">
+        <div class="hero-num">02</div>
+        <div class="hero-title">Weather Dashboard</div>
+        <div class="hero-sub">Real-Time · Forecast · Location</div>
       </div>
     </section>
 
@@ -745,16 +633,16 @@
     <div class="container">
       <!-- OVERVIEW SECTION -->
       <div class="section reveal">
-        <h2 class="section-title">Project Overview</h2>
+        <h2 class="section-title" data-i18n="ps.overview">Project Overview</h2>
         <div class="text-content">
-          <p>
+          <p data-i18n="we.ov1">
             <span class="highlight">Weather App</span> is a modern, real-time
             weather application that provides accurate weather forecasts and
             current conditions for locations worldwide. The app features an
             intuitive interface with dynamic weather visualizations and
             comprehensive meteorological data.
           </p>
-          <p>
+          <p data-i18n="we.ov2">
             Built with cutting-edge web technologies, this weather application
             delivers instant weather updates, detailed forecasts, and beautiful
             weather animations. The app seamlessly integrates with weather APIs
@@ -766,10 +654,10 @@
 
       <!-- FEATURE SECTION -->
       <div class="section reveal">
-        <h2 class="section-title">Key Features</h2>
+        <h2 class="section-title" data-i18n="ps.features">Key Features</h2>
 
         <div class="text-content">
-          <p>
+          <p data-i18n="we.featIntro">
             A comprehensive weather solution with features that are
             <span class="highlight">accurate</span>,
             <span class="highlight">real-time</span>, and designed for daily
@@ -780,8 +668,8 @@
         <div class="features-grid">
           <div class="feature-item">
             <i class="fa-solid fa-cloud-sun feature-icon"></i>
-            <h3>Real-Time Weather</h3>
-            <p>
+            <h3 data-i18n="we.f1t">Real-Time Weather</h3>
+            <p data-i18n="we.f1d">
               Live weather updates with current temperature, humidity, wind
               speed, and atmospheric conditions for any location.
             </p>
@@ -789,8 +677,8 @@
 
           <div class="feature-item">
             <i class="fa-solid fa-calendar-days feature-icon"></i>
-            <h3>7-Day Forecast</h3>
-            <p>
+            <h3 data-i18n="we.f2t">7-Day Forecast</h3>
+            <p data-i18n="we.f2d">
               Detailed weekly weather predictions with daily high/low
               temperatures, precipitation chances, and weather patterns.
             </p>
@@ -798,8 +686,8 @@
 
           <div class="feature-item">
             <i class="fa-solid fa-location-dot feature-icon"></i>
-            <h3>Location Search</h3>
-            <p>
+            <h3 data-i18n="we.f3t">Location Search</h3>
+            <p data-i18n="we.f3d">
               Search weather for any city worldwide with automatic geolocation
               detection and saved favorite locations.
             </p>
@@ -807,8 +695,8 @@
 
           <div class="feature-item">
             <i class="fa-solid fa-wind feature-icon"></i>
-            <h3>Weather Details</h3>
-            <p>
+            <h3 data-i18n="we.f4t">Weather Details</h3>
+            <p data-i18n="we.f4d">
               Comprehensive meteorological data including UV index, visibility,
               air pressure, and feels-like temperature.
             </p>
@@ -816,8 +704,8 @@
 
           <div class="feature-item">
             <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
-            <h3>Responsive Design</h3>
-            <p>
+            <h3 data-i18n="we.f5t">Responsive Design</h3>
+            <p data-i18n="we.f5d">
               Fully optimized interface that works flawlessly on mobile phones,
               tablets, and desktop screens.
             </p>
@@ -825,8 +713,8 @@
 
           <div class="feature-item">
             <i class="fa-solid fa-palette feature-icon"></i>
-            <h3>Dynamic Themes</h3>
-            <p>
+            <h3 data-i18n="we.f6t">Dynamic Themes</h3>
+            <p data-i18n="we.f6d">
               Beautiful weather-based backgrounds and animations that change
               according to current weather conditions.
             </p>
@@ -836,16 +724,16 @@
 
       <!-- DEVELOPMENT PROCESS -->
       <div class="section reveal">
-        <h2 class="section-title">Development Process</h2>
+        <h2 class="section-title" data-i18n="ps.development">Development Process</h2>
         <div class="text-content">
-          <p>
+          <p data-i18n="we.dp1">
             The development process focused on creating an intuitive weather
             application that presents complex meteorological data in an
             accessible format. Research into weather data visualization and user
             experience patterns informed the design decisions, ensuring users
             can quickly understand weather conditions at a glance.
           </p>
-          <p>
+          <p data-i18n="we.dp2">
             Built using <span class="highlight">HTML5</span>,
             <span class="highlight">CSS3</span>, and
             <span class="highlight">JavaScript</span> with integration to
@@ -859,7 +747,7 @@
 
       <!-- TECH STACK -->
       <div class="section reveal">
-        <h2 class="section-title">Technologies Used</h2>
+        <h2 class="section-title" data-i18n="ps.tech">Technologies Used</h2>
         <div class="tech-tags">
           <span class="tech-tag"><span>HTML5</span></span>
           <span class="tech-tag"><span>CSS3</span></span>
@@ -872,64 +760,12 @@
         </div>
       </div>
 
-      <!-- GALLERY -->
-      <div class="section reveal">
-        <h2 class="section-title">Project Gallery</h2>
-        <div class="gallery">
-          <div class="gallery-item">
-            <img
-              src="../images/weathermain.png"
-              alt="Main Weather Dashboard"
-              onerror="this.src = 'https://picsum.photos/seed/weather1/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img
-              src="../images/weather2.png"
-              alt="Weather Forecast View"
-              onerror="this.src = 'https://picsum.photos/seed/weather2/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img
-              src="../images/weather3.png"
-              alt="Location Search Feature"
-              onerror="this.src = 'https://picsum.photos/seed/weather3/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img
-              src="../images/weather4.png"
-              alt="Weather Details Panel"
-              onerror="this.src = 'https://picsum.photos/seed/weather4/800/500'"
-            />
-          </div>
-          <div class="gallery-item">
-            <img
-              src="../images/weather5.png"
-              alt="weather forecast panel"
-              onerror="this.src = 'https://picsum.photos/seed/weather4/800/500'"
-            />
-          </div>
-          <div class="gallery-item">
-            <img
-              src="../images/weather6.png"
-              alt="weather forecast panel"
-              onerror="this.src = 'https://picsum.photos/seed/weather4/800/500'"
-            />
-          </div>
-        </div>
-      </div>
-
       <!-- CTA SECTION -->
       <div class="cta-section section reveal">
-        <h2 class="cta-title">Interested in this Project?</h2>
+        <h2 class="cta-title" data-i18n="ps.cta">Interested in this Project?</h2>
         <div class="cta-buttons">
-          <a href="/contact.html" class="btn">Get In Touch</a>
-          <a href="/projects.html" class="btn">View Other Projects</a>
+          <a href="/contact.html" class="btn" data-i18n="cta">Get In Touch</a>
+          <a href="/projects.html" class="btn" data-i18n="ps.other">View Other Projects</a>
         </div>
       </div>
     </div>
@@ -962,59 +798,6 @@
 
       window.addEventListener("scroll", revealOnScroll);
       revealOnScroll();
-
-      // Lightbox functionality
-      const galleryItems = document.querySelectorAll(".gallery-item");
-
-      galleryItems.forEach((item) => {
-        const img = item.querySelector("img");
-
-        item.addEventListener("click", () => {
-          const src = img.src;
-          const alt = img.alt;
-          createLightbox(src, alt);
-        });
-      });
-
-      function createLightbox(src, alt) {
-        const lightbox = document.createElement("div");
-        lightbox.classList.add("lightbox");
-
-        const image = document.createElement("img");
-        image.src = src;
-        image.alt = alt;
-        image.classList.add("lightbox-img");
-
-        const closeBtn = document.createElement("span");
-        closeBtn.innerHTML = "&times;";
-        closeBtn.classList.add("lightbox-close");
-        closeBtn.title = "Close (Esc)";
-
-        lightbox.appendChild(image);
-        lightbox.appendChild(closeBtn);
-        document.body.appendChild(lightbox);
-
-        requestAnimationFrame(() => {
-          lightbox.classList.add("active");
-        });
-
-        closeBtn.addEventListener("click", closeLightbox);
-        lightbox.addEventListener("click", closeLightbox);
-
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") closeLightbox();
-        });
-      }
-
-      function closeLightbox() {
-        const lightbox = document.querySelector(".lightbox");
-        if (lightbox) {
-          lightbox.classList.remove("active");
-          setTimeout(() => {
-            lightbox.remove();
-          }, 300);
-        }
-      }
     </script>
   </body>
 </html>

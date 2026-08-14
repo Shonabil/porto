@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>Resume — Nabil</title>
+  <meta name="description" content="Resume of Muhammad Syafwan Nabil — web developer specializing in Laravel, PHP, and backend engineering. Education, skills, and project experience." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f7;
+      --surface2: #f0f0f0;
+      --text: #111111;
+      --text-muted: #666666;
+      --active: #c8a27a;
+      --active-glow: rgba(200,162,122,0.2);
+      --active-dim: rgba(200,162,122,0.08);
+      --border: rgba(0,0,0,0.08);
+    }
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60vw 50vh at 15% 60%, rgba(200,162,122,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50vw 40vh at 90% 20%, rgba(200,162,122,0.04) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,162,122,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,162,122,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    .top-nav {
+      position: fixed; top: 5vh; right: 5vw;
+      display: flex; gap: 2rem; align-items: center;
+      opacity: 0; animation: fadeDown 0.8s ease 0.4s forwards; z-index: 100;
+    }
+    .back-btn {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--bg); background: var(--active);
+      text-decoration: none; padding: 0.55rem 1.4rem;
+      border-radius: 3px; border: 1.5px solid var(--active);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: transparent; color: var(--active);
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
+    }
+    .nav-link {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      position: relative; transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--active);
+      transition: width 0.35s ease;
+    }
+    .nav-link:hover { color: var(--active); }
+    .nav-link:hover::after { width: 100%; }
+
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(40px)}  to{opacity:1;transform:translateY(0)} }
+
+    /* MAIN */
+    .container {
+      position: relative; max-width: 1200px;
+      margin: 0 auto; padding: 16vh 8vw 10vh; z-index: 1;
+    }
+
+    .page-label {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .page-label-line { width: 24px; height: 1px; background: var(--active); }
+    .page-label-text {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--active);
+    }
+
+    .page-title {
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 900; color: var(--text);
+      line-height: 0.95; letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+    }
+
+    /* RESUME HEADER */
+    .resume-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+    .resume-meta-name {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 900; letter-spacing: -0.01em; color: var(--text);
+    }
+    .resume-meta-role {
+      font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--active); margin-top: 0.3rem;
+    }
+    .resume-head-actions { display: flex; gap: 0.8rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      text-decoration: none; padding: 0.7rem 1.5rem;
+      border-radius: 3px; border: 1.5px solid var(--active);
+      transition: all 0.3s ease; cursor: pointer;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .btn-solid {
+      background: var(--active); color: #fff;
+    }
+    .btn-solid:hover {
+      background: transparent; color: var(--active);
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
+    }
+    .btn-outline {
+      background: transparent; color: var(--active);
+    }
+    .btn-outline:hover {
+      background: var(--active); color: #fff;
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
+    }
+
+    /* GRID */
+    .resume-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+
+    .resume-col { opacity: 0; animation: fadeUp 0.8s ease forwards; }
+    .resume-col:nth-child(1) { animation-delay: 1s; }
+    .resume-col:nth-child(2) { animation-delay: 1.2s; }
+
+    .section-heading {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 800; color: var(--text);
+      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-heading::before {
+      content: ''; width: 4px; height: 1.2em;
+      background: var(--active); border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .section-block { margin-bottom: 2.5rem; }
+
+    /* CONTACT LIST */
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-list li {
+      display: flex; align-items: center; gap: 0.9rem;
+      font-size: 0.85rem; color: var(--text-muted);
+    }
+    .contact-icon {
+      width: 30px; height: 30px; flex-shrink: 0;
+      border-radius: 8px; background: var(--active-dim);
+      border: 1px solid rgba(200,162,122,0.2);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--active);
+    }
+    .contact-icon svg{ width: 15px; height: 15px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .contact-list a { color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+    .contact-list a:hover { color: var(--active); }
+
+    /* SKILL TAGS */
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .skill-tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--text); background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem; border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .skill-tag:hover {
+      border-color: rgba(200,162,122,0.4); color: var(--active);
+      transform: translateY(-2px);
+    }
+
+    /* MINI TIMELINE */
+    .mini-timeline { list-style: none; display: flex; flex-direction: column; }
+    .mini-timeline-item {
+      display: flex; gap: 1.1rem; padding-bottom: 1.6rem;
+      position: relative;
+    }
+    .mini-timeline-item:not(:last-child)::before {
+      content: ''; position: absolute; left: 6px; top: 14px;
+      width: 1px; height: calc(100% - 12px); background: var(--border);
+    }
+    .mini-dot {
+      width: 13px; height: 13px; border-radius: 50%;
+      background: var(--surface); border: 2px solid var(--active);
+      flex-shrink: 0; margin-top: 3px;
+    }
+    .mini-year {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--active); margin-bottom: 0.25rem;
+    }
+    .mini-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .mini-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* PROFILE TEXT */
+    .text-block {
+      font-size: clamp(0.87rem, 1.3vw, 0.95rem);
+      line-height: 1.85; color: var(--text-muted); margin-bottom: 1rem;
+    }
+    .hl { color: var(--text); font-weight: 500; }
+
+    /* DECO */
+    .number-deco {
+      position: fixed; bottom: 5vh; right: 5vw;
+      font-size: clamp(7rem, 14vw, 11rem); font-weight: 900;
+      color: transparent; -webkit-text-stroke: 1px rgba(200,162,122,0.06);
+      line-height: 1; pointer-events: none; z-index: 0; user-select: none;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .container { padding: 14vh 5vw 8vh; }
+      .resume-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .number-deco { display: none; }
+      .top-nav { top: 3vh; right: 5vw; gap: 1rem; }
+      .back-btn { font-size: 0.65rem; padding: 0.45rem 1rem; }
+      .resume-head-actions { width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+    }
+
+    /* PRINT */
+    @media print {
+      .top-nav, .number-deco, .resume-head-actions, .site-footer { display: none !important; }
+      body::before, body::after { display: none; }
+      .container { padding: 0; max-width: 100%; }
+      .resume-grid { display: block; }
+      .resume-col { margin-bottom: 2rem; }
+      * { animation: none !important; opacity: 1 !important; }
+    }
+  </style>
+  <script src="lang.js" defer></script>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="index.html" class="back-btn">← Menu</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link" target="_blank">GitHub</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-label">
+      <span class="page-label-line"></span>
+      <span class="page-label-text" data-i18n="rm.label">06 — Resume</span>
+    </div>
+    <h1 class="page-title" data-i18n="rm.title">CURRICULUM<br>VITAE.</h1>
+
+    <div class="resume-head">
+      <div>
+        <div class="resume-meta-name">Muhammad Syafwan Nabil</div>
+        <div class="resume-meta-role" data-i18n="rm.role">Web Developer · Backend Engineer</div>
+      </div>
+      <div class="resume-head-actions">
+        <button class="btn btn-solid" onclick="window.print()" data-i18n="rm.print">Print / Save PDF</button>
+        <a class="btn btn-outline" href="contact.html" data-i18n="rm.hire">Hire Me</a>
+      </div>
+    </div>
+
+    <div class="resume-grid">
+
+      <div class="resume-col">
+
+        <div class="section-block">
+          <h2 class="section-heading" data-i18n="rm.profile">Profile</h2>
+          <p class="text-block" data-i18n="rm.profile.p">
+            Dedicated <span class="hl">web developer</span> and <span class="hl">5th-semester informatics engineering student</span> at Politeknik IDN Bogor. I build reliable, scalable web applications with a strong focus on backend systems — APIs, databases, and clean server-side logic.
+          </p>
+          <p class="text-block" data-i18n="rm.profile.p2">
+            I have shipped <span class="hl">8+ personal and academic projects</span>, from service management systems to learning games and mobile apps, always applying best practices in structure, security, and maintainability.
+          </p>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading" data-i18n="rm.contact">Contact</h2>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+              <a href="mailto:shonabil27@gmail.com">shonabil27@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+              <a href="https://wa.me/6281241081143" target="_blank" rel="noopener">+62 812 4108 1143</a>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span>Bogor, Indonesia</span>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
+              <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" target="_blank" rel="noopener">LinkedIn</a>
+            </li>
+            <li>
+              <span class="contact-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+              <a href="https://github.com/Shonabil" target="_blank" rel="noopener">GitHub</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading" data-i18n="rm.education">Education</h2>
+          <ul class="mini-timeline">
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2023 — Present</div>
+                <div class="mini-title" data-i18n="rm.edu.school">Politeknik IDN Bogor</div>
+                <div class="mini-desc" data-i18n="rm.edu.major">Bachelor of Informatics Engineering · 5th Semester</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2020 — 2023</div>
+                <div class="mini-title" data-i18n="rm.edu.ojk">SMK (High School)</div>
+                <div class="mini-desc" data-i18n="rm.edu.ojk.major">Computer and Network Engineering</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading" data-i18n="rm.skills">Technical Skills</h2>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML / CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">PHP</span>
+            <span class="skill-tag">Laravel</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag">Flutter</span>
+            <span class="skill-tag">Git &amp; GitHub</span>
+            <span class="skill-tag">Blade</span>
+            <span class="skill-tag">Alpine.js</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="resume-col">
+
+        <div class="section-block">
+          <h2 class="section-heading" data-i18n="rm.experience">Project Experience</h2>
+          <ul class="mini-timeline">
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.bmdiesel">BmDiesel</div>
+                <div class="mini-desc" data-i18n="abt.tl.bmdiesel.desc">Built a service management system for diesel repair workshops with a customer portal, phase tracking, payments, and reports.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.flowly">Flowly</div>
+                <div class="mini-desc" data-i18n="abt.tl.flowly.desc">Built an all-in-one productivity dashboard with Laravel combining tasks, projects, calendar, finance, and a focus timer.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.gb">Penjelajah Hijau</div>
+                <div class="mini-desc" data-i18n="abt.tl.gb.desc">Built an interactive web-based learning game for elementary IPAS on plant reproduction with adventure maps, games, and quizzes.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.aquatrack">AquaTrack</div>
+                <div class="mini-desc" data-i18n="abt.tl.aquatrack.desc">Developed a smart mobile hydration tracking app with Flutter, personalized goals, reminders, and progress analytics.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.yayasan">Yayasan Mufid</div>
+                <div class="mini-desc" data-i18n="abt.tl.yayasan.desc">Developed a website to support the foundation’s needs and improve information accessibility.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.mono">Game Monopoli</div>
+                <div class="mini-desc" data-i18n="abt.tl.mono.desc">Recreated the classic monopoly board game in the browser with a full economy system, property trading, and multiplayer turns.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2025</div>
+                <div class="mini-title" data-i18n="abt.tl.weather">Weather Dashboard</div>
+                <div class="mini-desc" data-i18n="abt.tl.weather.desc">Created a real-time weather app with dynamic visualizations, forecasts, and location-based updates using external APIs.</div>
+              </div>
+            </li>
+            <li class="mini-timeline-item">
+              <span class="mini-dot"></span>
+              <div>
+                <div class="mini-year">2024</div>
+                <div class="mini-title" data-i18n="abt.tl.muslim">Muslim Apps</div>
+                <div class="mini-desc" data-i18n="abt.tl.muslim.desc">Built a comprehensive Islamic application with Flutter and Laravel, delivering prayer times, Quran readings, and daily duas.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section-block">
+          <h2 class="section-heading" data-i18n="rm.languages">Languages</h2>
+          <div class="skill-tags">
+            <span class="skill-tag" data-i18n="rm.lang.id">Indonesian — Native</span>
+            <span class="skill-tag" data-i18n="rm.lang.en">English — Professional</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="number-deco">06</div>
+
+</body>
+</html>

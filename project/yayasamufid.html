@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Website — Project Detail</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <title>Yayasan Mufid — Project Detail</title>
+    <meta name="description" content="Yayasan Mufid — official foundation website presenting profile, programs, and news with a simple admin interface." />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
@@ -40,7 +42,6 @@
         color: var(--text);
       }
 
-      /* NOISE TEXTURE */
       body::after {
         content: "";
         position: fixed;
@@ -50,7 +51,6 @@
         z-index: -1;
       }
 
-      /* NAVIGATION */
       .top-nav {
         position: fixed;
         top: 0;
@@ -72,7 +72,8 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       }
 
-      .back-btn, .nav-link {
+      .back-btn,
+      .nav-link {
         font-size: 0.8rem;
         font-weight: 700;
         letter-spacing: 0.05em;
@@ -88,7 +89,8 @@
         overflow: hidden;
       }
 
-      .back-btn::before, .nav-link::before {
+      .back-btn::before,
+      .nav-link::before {
         content: "";
         position: absolute;
         top: 50%;
@@ -97,90 +99,77 @@
         height: 0;
         border-radius: 50%;
         background: var(--accent);
-        transition: width 0.4s ease, height 0.4s ease;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
         transform: translate(-50%, -50%);
         z-index: -1;
       }
 
-      .back-btn:hover::before, .nav-link:hover::before {
+      .back-btn:hover::before,
+      .nav-link:hover::before {
         width: 300px;
         height: 300px;
       }
 
-      .back-btn:hover, .nav-link:hover {
+      .back-btn:hover,
+      .nav-link:hover {
         border-color: var(--accent);
         color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(200, 162, 122, 0.2);
       }
 
-      /* HERO SECTION */
       .hero {
         position: relative;
         height: 90vh;
         width: 100%;
         overflow: hidden;
-      }
-
-      .hero-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        position: relative;
-        z-index: 1;
-        animation: slowZoom 20s ease-in-out infinite alternate;
-      }
-
-      @keyframes slowZoom {
-        from { transform: scale(1); }
-        to { transform: scale(1.05); }
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 40%;
-        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-        z-index: 2;
-      }
-
-      .hero-overlay {
-        position: absolute;
-        bottom: 3rem;
-        left: 0;
-        width: 100%;
+        background:
+          radial-gradient(circle at 78% 18%, rgba(200,162,122,0.28), transparent 55%),
+          linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
         display: flex;
+        align-items: center;
         justify-content: center;
-        z-index: 10;
-        pointer-events: none;
       }
 
-      .project-badge {
-        background: rgba(232, 213, 192, 0.95);
-        color: #000000;
-        border: 2px solid var(--active);
-        font-size: 0.85rem;
-        font-weight: 800;
-        letter-spacing: 0.15em;
+      .hero-text-inner {
+        position: relative;
+        z-index: 5;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 0 2rem;
+      }
+
+      .hero-num {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 900;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(232,213,192,0.7);
+        line-height: 1;
+        letter-spacing: 0.06em;
+      }
+
+      .hero-title {
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: 0.06em;
+        line-height: 1.05;
         text-transform: uppercase;
-        border-radius: 50px;
-        padding: 0.8rem 2.5rem;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-        backdrop-filter: blur(10px);
-        animation: fadeUpBadge 0.8s ease 0.5s forwards;
-        opacity: 0;
-        transform: translateY(20px);
       }
 
-      @keyframes fadeUpBadge {
-        to { opacity: 1; transform: translateY(0); }
+      .hero-sub {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--active);
       }
-      
-      /* MAIN CONTAINER */
+
       .container {
         position: relative;
         max-width: 1100px;
@@ -189,7 +178,6 @@
         z-index: 10;
       }
 
-      /* SECTIONS GENERAL */
       .section {
         margin-bottom: 8rem;
         opacity: 0;
@@ -237,7 +225,7 @@
         max-width: 850px;
       }
 
-      .text-content p { 
+      .text-content p {
         margin-bottom: 1.5rem;
         transition: color 0.3s ease;
       }
@@ -264,7 +252,6 @@
         opacity: 0.3;
       }
 
-      /* FEATURES GRID */
       .features-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -291,7 +278,12 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(200, 162, 122, 0.1), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(200, 162, 122, 0.1),
+          transparent
+        );
         transition: left 0.6s ease;
       }
 
@@ -330,7 +322,6 @@
         line-height: 1.7;
       }
 
-      /* TECH STACK */
       .tech-tags {
         display: flex;
         flex-wrap: wrap;
@@ -361,7 +352,9 @@
         background: var(--accent);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: width 0.4s ease, height 0.4s ease;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
         z-index: 0;
       }
 
@@ -382,121 +375,6 @@
         z-index: 1;
       }
 
-      /* GALLERY */
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-        margin-top: 3rem;
-      }
-
-      .gallery-item {
-        border-radius: 16px;
-        overflow: hidden;
-        aspect-ratio: 16/10;
-        background-color: #eee;
-        position: relative;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: all 0.4s ease;
-        cursor: zoom-in;
-      }
-
-      .gallery-item::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(45deg, rgba(200, 162, 122, 0.3), transparent);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      .gallery-item:hover::after {
-        opacity: 1;
-      }
-
-      .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        display: block;
-        pointer-events: none;
-      }
-
-      .gallery-item:hover {
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        transform: translateY(-5px);
-      }
-
-      .gallery-item:hover img {
-        transform: scale(1.1);
-      }
-
-      /* LIGHTBOX */
-      .lightbox {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-
-      .lightbox.active {
-        opacity: 1;
-        pointer-events: all;
-        backdrop-filter: blur(5px);
-      }
-
-      .lightbox-img {
-        max-width: 90%;
-        max-height: 90vh;
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-        border: 2px solid #fff;
-        transform: scale(0.9);
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .lightbox.active .lightbox-img {
-        transform: scale(1);
-      }
-
-      .lightbox-close {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        color: #fff;
-        font-size: 3rem;
-        cursor: pointer;
-        font-family: sans-serif;
-        line-height: 1;
-        transition: all 0.3s ease;
-        z-index: 1001;
-        background: rgba(0,0,0,0.2);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .lightbox-close:hover {
-        color: var(--active);
-        background: #fff;
-        transform: rotate(90deg);
-      }
-
-      /* CTA SECTION */
       .cta-section {
         background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
         color: #fff;
@@ -583,7 +461,9 @@
         background: var(--accent);
         transform: translate(-50%, -50%);
         border-radius: 8px;
-        transition: width 0.4s ease, height 0.4s ease;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
         z-index: -1;
       }
 
@@ -600,11 +480,16 @@
       }
 
       @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(50px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      /* SCROLL REVEAL */
       .reveal {
         opacity: 0;
         transform: translateY(50px);
@@ -616,146 +501,151 @@
         transform: translateY(0);
       }
 
-      /* MOBILE */
       @media (max-width: 768px) {
-        .hero { height: 60vh; }
-        .container { padding: 4vh 1.5rem; }
-        .top-nav { 
-          padding: 1.2rem; 
+        .hero {
+          height: 60vh;
+        }
+        .container {
+          padding: 4vh 1.5rem;
+        }
+        .top-nav {
+          padding: 1.2rem;
           flex-direction: column;
           gap: 1rem;
           align-items: stretch;
         }
-        
+
         .top-nav > div {
           justify-content: center;
         }
-        
-        .features-grid { 
+
+        .features-grid {
           grid-template-columns: 1fr;
           gap: 2rem;
         }
-        
-        .gallery { 
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
+
+        .cta-section {
+          padding: 4rem 2rem;
         }
-        
-        .cta-section { padding: 4rem 2rem; }
-        .cta-buttons { 
+        .cta-buttons {
           flex-direction: column;
           gap: 1rem;
         }
-        .btn { 
-          width: 100%; 
-          text-align: center; 
+        .btn {
+          width: 100%;
+          text-align: center;
         }
-        
-        .section { margin-bottom: 5rem; }
-        
+
+        .section {
+          margin-bottom: 5rem;
+        }
+
         .tech-tags {
           justify-content: center;
         }
       }
     </style>
+    <script src="../lang.js" defer></script>
   </head>
   <body>
     <nav class="top-nav" id="navbar">
-      <a href="/projects.html" class="back-btn">← Back to Projects</a>
-      <div style="display: flex; gap: 1.5rem;">
-        <a href="/index.html" class="nav-link">Menu</a>
-        <a href="/contact.html" class="nav-link">Contact</a>
+      <a href="/projects.html" class="back-btn" data-i18n="ps.back">← Back to Projects</a>
+      <div style="display: flex; gap: 1.5rem">
+        <a href="/index.html" class="nav-link" data-i18n="ps.menu">Menu</a>
+        <a href="/contact.html" class="nav-link" data-i18n="ps.contact">Contact</a>
       </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero">
-      <img
-        src="../images/porto.png"
-        alt="Portfolio Website Hero"
-        class="hero-image"
-        onerror="this.src='https://picsum.photos/seed/porthero/1600/900'"
-      />
-      
-      <div class="hero-overlay">
-        <div class="project-badge">PORTFOLIO WEBSITE</div>
+      <div class="hero-text-inner">
+        <div class="hero-num">05</div>
+        <div class="hero-title">Yayasan Mufid</div>
+        <div class="hero-sub">Profile · Programs · News</div>
       </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <div class="container">
-      
       <!-- OVERVIEW SECTION -->
       <div class="section reveal">
-        <h2 class="section-title">Project Overview</h2>
+        <h2 class="section-title" data-i18n="ps.overview">Project Overview</h2>
         <div class="text-content">
-          <p>
-            <span class="highlight">Portfolio Website</span> is a modern, elegant personal portfolio designed to showcase creative work and professional achievements. The website features a clean, minimalist design with smooth animations and intuitive navigation that provides an engaging user experience.
+          <p data-i18n="ya.ov1">
+            <span class="highlight">Yayasan Mufid</span> is an official website
+            built to present the foundation's profile, programs, and news. It
+            improves information accessibility so visitors can quickly
+            understand what the foundation does and how to get involved.
           </p>
-          <p>
-            Built with contemporary web technologies, this portfolio emphasizes visual storytelling through carefully crafted layouts, interactive elements, and responsive design. Every detail has been optimized to create a memorable first impression while maintaining fast loading times and excellent performance across all devices.
+          <p data-i18n="ya.ov2">
+            With clean pages for profiles, programs, and updates plus a simple
+            admin interface, the site stays easy to maintain and always up to
+            date.
           </p>
         </div>
       </div>
 
       <!-- FEATURE SECTION -->
       <div class="section reveal">
-        <h2 class="section-title">Key Features</h2>
+        <h2 class="section-title" data-i18n="ps.features">Key Features</h2>
 
         <div class="text-content">
-          <p>
-            A comprehensive showcase with features that are
-            <span class="highlight">modern</span>,
-            <span class="highlight">responsive</span>, and designed to impress.
+          <p data-i18n="ya.featIntro">
+            A foundation site with features that are
+            <span class="highlight">informative</span>,
+            <span class="highlight">accessible</span>, and easy to manage.
           </p>
         </div>
 
         <div class="features-grid">
           <div class="feature-item">
-            <i class="fa-solid fa-palette feature-icon"></i>
-            <h3>Modern Design</h3>
-            <p>
-              Clean and elegant interface with carefully chosen color schemes and typography that reflects professionalism.
+            <i class="fa-solid fa-handshake feature-icon"></i>
+            <h3 data-i18n="ya.f1t">Foundation Profile</h3>
+            <p data-i18n="ya.f1d">
+              A clear introduction to the vision, mission, and history of the
+              foundation.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
-            <h3>Fully Responsive</h3>
-            <p>
-              Optimized for all screen sizes, from mobile phones to large desktop displays with fluid layouts.
+            <i class="fa-solid fa-list-check feature-icon"></i>
+            <h3 data-i18n="ya.f2t">Programs Showcase</h3>
+            <p data-i18n="ya.f2d">
+              Dedicated pages that explain each program and the impact it
+              creates.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-briefcase feature-icon"></i>
-            <h3>Project Showcase</h3>
-            <p>
-              Interactive project gallery with detailed case studies, images, and comprehensive descriptions.
-            </p>
-          </div>
-
-          <div class="feature-item">
-            <i class="fa-solid fa-bolt feature-icon"></i>
-            <h3>Smooth Animations</h3>
-            <p>
-              Engaging micro-interactions and scroll animations that enhance user experience without compromising performance.
+            <i class="fa-solid fa-newspaper feature-icon"></i>
+            <h3 data-i18n="ya.f3t">News & Articles</h3>
+            <p data-i18n="ya.f3d">
+              Publish updates and articles to keep the community informed.
             </p>
           </div>
 
           <div class="feature-item">
             <i class="fa-solid fa-envelope feature-icon"></i>
-            <h3>Contact Form</h3>
-            <p>
-              Easy-to-use contact section with validation, allowing visitors to reach out directly.
+            <h3 data-i18n="ya.f4t">Contact & Donation</h3>
+            <p data-i18n="ya.f4d">
+              Make it easy for visitors to reach out or support the foundation.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-gauge-high feature-icon"></i>
-            <h3>Fast Performance</h3>
-            <p>
-              Optimized images, efficient code, and best practices ensure lightning-fast loading times.
+            <i class="fa-solid fa-gear feature-icon"></i>
+            <h3 data-i18n="ya.f5t">Admin Panel</h3>
+            <p data-i18n="ya.f5d">
+              A simple content management system so staff can update the site
+              easily.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <i class="fa-solid fa-mobile-screen feature-icon"></i>
+            <h3 data-i18n="ya.f6t">Responsive Design</h3>
+            <p data-i18n="ya.f6d">
+              A mobile-friendly experience that works well for every visitor.
             </p>
           </div>
         </div>
@@ -763,160 +653,72 @@
 
       <!-- DEVELOPMENT PROCESS -->
       <div class="section reveal">
-        <h2 class="section-title">Development Process</h2>
+        <h2 class="section-title" data-i18n="ps.development">Development Process</h2>
         <div class="text-content">
-          <p>
-            The development process began with extensive research into current design trends and user expectations for portfolio websites. Wireframes and prototypes were created to establish the site structure and user flow, ensuring every interaction felt natural and intuitive.
+          <p data-i18n="ya.dp1">
+            The project focused on clear information architecture so visitors
+            can find what they need in just a few clicks. Content was structured
+            around the foundation's real needs.
           </p>
-          <p>
-            Built using <span class="highlight">HTML5</span>, <span class="highlight">CSS3</span>, and <span class="highlight">vanilla JavaScript</span>, the website emphasizes performance and accessibility. Special attention was given to creating smooth animations, implementing SEO best practices, and ensuring cross-browser compatibility for a consistent experience.
+          <p data-i18n="ya.dp2">
+            Built with <span class="highlight">HTML</span>,
+            <span class="highlight">CSS</span>, and a lightweight admin
+            interface, the website prioritizes speed, accessibility, and easy
+            maintenance.
           </p>
         </div>
       </div>
 
       <!-- TECH STACK -->
       <div class="section reveal">
-        <h2 class="section-title">Technologies Used</h2>
+        <h2 class="section-title" data-i18n="ps.tech">Technologies Used</h2>
         <div class="tech-tags">
-          <span class="tech-tag"><span>HTML5</span></span>
-          <span class="tech-tag"><span>CSS3</span></span>
-          <span class="tech-tag"><span>TypeScript</span></span>
+          <span class="tech-tag"><span>HTML</span></span>
+          <span class="tech-tag"><span>CSS</span></span>
+          <span class="tech-tag"><span>JavaScript</span></span>
+          <span class="tech-tag"><span>Admin CMS</span></span>
           <span class="tech-tag"><span>Responsive Design</span></span>
-          <span class="tech-tag"><span>Github</span></span>
-          <span class="tech-tag"><span>Font Awesome</span></span>
-          <span class="tech-tag"><span>Google Fonts</span></span>
-        </div>
-      </div>
-
-      <!-- GALLERY -->
-      <div class="section reveal">
-        <h2 class="section-title">Project Gallery</h2>
-        <div class="gallery">
-          <div class="gallery-item">
-            <img 
-              src="../images/porto.png" 
-              alt="Homepage Design" 
-              onerror="this.src='https://picsum.photos/seed/porthome/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img 
-              src="../images/porto1.png" 
-              alt="Projects Section" 
-              onerror="this.src='https://picsum.photos/seed/portprojects/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img 
-              src="../images/porto2.png" 
-              alt="About Section" 
-              onerror="this.src='https://picsum.photos/seed/portabout/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img 
-              src="../images/porto3.png" 
-              alt="Contact Section" 
-              onerror="this.src='https://picsum.photos/seed/portcontact/800/500'"
-            />
-          </div>
         </div>
       </div>
 
       <!-- CTA SECTION -->
       <div class="cta-section section reveal">
-        <h2 class="cta-title">Interested in this Project?</h2>
+        <h2 class="cta-title" data-i18n="ps.cta">Interested in this Project?</h2>
         <div class="cta-buttons">
-          <a href="/contact.html" class="btn">Get In Touch</a>
-          <a href="/projects.html" class="btn">View Other Projects</a>
+          <a href="/contact.html" class="btn" data-i18n="cta">Get In Touch</a>
+          <a href="/projects.html" class="btn" data-i18n="ps.other">View Other Projects</a>
         </div>
       </div>
-
     </div>
 
     <script>
       // Navbar scroll effect
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
         if (window.scrollY > 100) {
-          navbar.classList.add('scrolled');
+          navbar.classList.add("scrolled");
         } else {
-          navbar.classList.remove('scrolled');
+          navbar.classList.remove("scrolled");
         }
       });
 
       // Scroll reveal animation
-      const reveals = document.querySelectorAll('.reveal');
-      
+      const reveals = document.querySelectorAll(".reveal");
+
       const revealOnScroll = () => {
-        reveals.forEach(el => {
+        reveals.forEach((el) => {
           const windowHeight = window.innerHeight;
           const revealTop = el.getBoundingClientRect().top;
           const revealPoint = 100;
-          
+
           if (revealTop < windowHeight - revealPoint) {
-            el.classList.add('active');
+            el.classList.add("active");
           }
         });
       };
 
-      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener("scroll", revealOnScroll);
       revealOnScroll();
-
-      // Lightbox functionality
-      const galleryItems = document.querySelectorAll('.gallery-item');
-
-      galleryItems.forEach(item => {
-        const img = item.querySelector('img');
-
-        item.addEventListener('click', () => {
-          const src = img.src;
-          const alt = img.alt;
-          createLightbox(src, alt);
-        });
-      });
-
-      function createLightbox(src, alt) {
-        const lightbox = document.createElement('div');
-        lightbox.classList.add('lightbox');
-
-        const image = document.createElement('img');
-        image.src = src;
-        image.alt = alt;
-        image.classList.add('lightbox-img');
-
-        const closeBtn = document.createElement('span');
-        closeBtn.innerHTML = '&times;';
-        closeBtn.classList.add('lightbox-close');
-        closeBtn.title = 'Close (Esc)';
-
-        lightbox.appendChild(image);
-        lightbox.appendChild(closeBtn);
-        document.body.appendChild(lightbox);
-
-        requestAnimationFrame(() => {
-          lightbox.classList.add('active');
-        });
-
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', closeLightbox);
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') closeLightbox();
-        });
-      }
-
-      function closeLightbox() {
-        const lightbox = document.querySelector('.lightbox');
-        if (lightbox) {
-          lightbox.classList.remove('active');
-          setTimeout(() => {
-            lightbox.remove();
-          }, 300);
-        }
-      }
     </script>
   </body>
+</html>

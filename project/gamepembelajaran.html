@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <title>Game Pembelajaran — Project Detail</title>
+    <meta name="description" content="Penjelajah Hijau — interactive web-based learning app for elementary IPAS on plant reproduction with an adventure map, mini-games, and quizzes." />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --active: #c8a27a;
+        --active-dark: #a37f5a;
+        --accent: #e8d5c0;
+        --gray: #666666;
+        --light-gray: #f9f9f9;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", system-ui, sans-serif;
+      }
+
+      body {
+        background: var(--bg);
+        overflow-x: hidden;
+        min-height: 100vh;
+        position: relative;
+        color: var(--text);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 200;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .top-nav.scrolled {
+        padding: 1rem 3rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .back-btn,
+      .nav-link {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #000000;
+        background: transparent;
+        text-decoration: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .back-btn::before,
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: var(--accent);
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+
+      .back-btn:hover::before,
+      .nav-link:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .back-btn:hover,
+      .nav-link:hover {
+        border-color: var(--accent);
+        color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(200, 162, 122, 0.2);
+      }
+
+      .hero {
+        position: relative;
+        height: 90vh;
+        width: 100%;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 18%, rgba(200,162,122,0.28), transparent 55%),
+          linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-text-inner {
+        position: relative;
+        z-index: 5;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 0 2rem;
+      }
+
+      .hero-num {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 900;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(232,213,192,0.7);
+        line-height: 1;
+        letter-spacing: 0.06em;
+      }
+
+      .hero-title {
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: 0.06em;
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .hero-sub {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--active);
+      }
+
+      .container {
+        position: relative;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 8vh 2rem 10vh;
+        z-index: 10;
+      }
+
+      .section {
+        margin-bottom: 8rem;
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .section:nth-child(1) { animation-delay: 0.1s; }
+      .section:nth-child(2) { animation-delay: 0.2s; }
+      .section:nth-child(3) { animation-delay: 0.3s; }
+      .section:nth-child(4) { animation-delay: 0.4s; }
+      .section:nth-child(5) { animation-delay: 0.5s; }
+
+      .section-title {
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        font-weight: 800;
+        color: var(--text);
+        margin-bottom: 2.5rem;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 1rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--active), var(--accent));
+        border-radius: 2px;
+        animation: slideIn 0.6s ease forwards;
+      }
+
+      @keyframes slideIn {
+        from { width: 0; }
+        to { width: 80px; }
+      }
+
+      .text-content {
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: var(--gray);
+        max-width: 850px;
+      }
+
+      .text-content p {
+        margin-bottom: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .text-content p:hover {
+        color: var(--text);
+      }
+
+      .highlight {
+        color: var(--active);
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+      }
+
+      .highlight::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--active);
+        opacity: 0.3;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .feature-item {
+        background: #fff;
+        padding: 3rem 2.5rem;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.04);
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(200, 162, 122, 0.1),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      .feature-item:hover::before {
+        left: 100%;
+      }
+
+      .feature-item:hover {
+        transform: translateY(-10px) scale(1.02);
+        border-color: var(--active);
+        box-shadow: 0 20px 50px rgba(200, 162, 122, 0.2);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        color: var(--active);
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        transition: transform 0.4s ease;
+      }
+
+      .feature-item:hover .feature-icon {
+        transform: scale(1.15) rotate(5deg);
+      }
+
+      .feature-item h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+
+      .feature-item p {
+        font-size: 1rem;
+        color: var(--gray);
+        line-height: 1.7;
+      }
+
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .tech-tag {
+        padding: 0.7rem 1.6rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text);
+        background: var(--light-gray);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 50px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: default;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tech-tag::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: var(--accent);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
+        z-index: 0;
+      }
+
+      .tech-tag:hover::before {
+        width: 200px;
+        height: 200px;
+      }
+
+      .tech-tag:hover {
+        color: #000000;
+        border-color: var(--active);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(200, 162, 122, 0.15);
+      }
+
+      .tech-tag span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-section {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        color: #fff;
+        padding: 7rem 3rem;
+        border-radius: 24px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, var(--active), transparent 70%);
+        opacity: 0.15;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      .cta-section::after {
+        content: "";
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--accent), transparent 70%);
+        opacity: 0.1;
+        animation: float 10s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(30px, -30px); }
+      }
+
+      .cta-title {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 900;
+        margin-bottom: 2.5rem;
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(135deg, #fff, var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn {
+        padding: 1.2rem 3rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.05em;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: var(--accent);
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
+        z-index: -1;
+      }
+
+      .btn:hover::before {
+        width: 110%;
+        height: 200%;
+      }
+
+      .btn:hover {
+        border-color: var(--accent);
+        color: #000000;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(200, 162, 122, 0.3);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          height: 60vh;
+        }
+        .container {
+          padding: 4vh 1.5rem;
+        }
+        .top-nav {
+          padding: 1.2rem;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
+        }
+
+        .top-nav > div {
+          justify-content: center;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .cta-section {
+          padding: 4rem 2rem;
+        }
+        .cta-buttons {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .section {
+          margin-bottom: 5rem;
+        }
+
+        .tech-tags {
+          justify-content: center;
+        }
+      }
+    </style>
+    <script src="../lang.js" defer></script>
+  </head>
+  <body>
+    <nav class="top-nav" id="navbar">
+      <a href="/projects.html" class="back-btn" data-i18n="ps.back">← Back to Projects</a>
+      <div style="display: flex; gap: 1.5rem">
+        <a href="/index.html" class="nav-link" data-i18n="ps.menu">Menu</a>
+        <a href="/contact.html" class="nav-link" data-i18n="ps.contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-text-inner">
+        <div class="hero-num">04</div>
+        <div class="hero-title">Penjelajah Hijau</div>
+        <div class="hero-sub">Game-Based Learning · IPAS · Elementary</div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <!-- OVERVIEW SECTION -->
+      <div class="section reveal">
+        <h2 class="section-title" data-i18n="ps.overview">Project Overview</h2>
+        <div class="text-content">
+          <p data-i18n="gb.ov1">
+            <span class="highlight">Penjelajah Hijau</span> is an interactive
+            web-based digital learning application designed specifically for
+            elementary school students to understand the IPAS topic of plant
+            reproduction. It packages abstract concepts such as perfect and
+            imperfect flowers, generative reproduction (seeds), and vegetative
+            reproduction (natural & artificial) into a fun visual adventure,
+            complete with a bee character as a guide, a virtual world map, and a
+            badge reward system.
+          </p>
+          <p data-i18n="gb.ov2">
+            The main goal of this project is to bridge text-heavy lessons into
+            an active learning experience through a game-based learning approach.
+            For students, it boosts interest, motivation, and memory retention
+            because learning happens while playing; for teachers, it provides
+            teaching media aligned with the Learning Outcomes (CP) and Learning
+            Objectives (TP), plus an assessment tool through quizzes and games
+            that can monitor student progress.
+          </p>
+        </div>
+      </div>
+
+      <!-- FEATURE SECTION -->
+      <div class="section reveal">
+        <h2 class="section-title" data-i18n="ps.features">Key Features</h2>
+
+        <div class="text-content">
+          <p data-i18n="gb.featIntro">
+            A learning adventure with features that are
+            <span class="highlight">interactive</span>,
+            <span class="highlight">playful</span>, and aligned with the
+            curriculum.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-item">
+            <i class="fa-solid fa-address-card feature-icon"></i>
+            <h3 data-i18n="gb.f1t">Student Login & Profile</h3>
+            <p data-i18n="gb.f1d">
+              Name and school input saved in localStorage, displayed as the
+              student's personal identity on every page.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <i class="fa-solid fa-table-list feature-icon"></i>
+            <h3 data-i18n="gb.f2t">Interactive Tab Materials</h3>
+            <p data-i18n="gb.f2d">
+              Complete learning content (flower introduction, generative, and
+              vegetative) with tab navigation and responsive plant image cards.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <i class="fa-solid fa-map feature-icon"></i>
+            <h3 data-i18n="gb.f3t">3-Zone Adventure Map</h3>
+            <p data-i18n="gb.f3d">
+              A virtual world of 1920×1080 with a panning camera system,
+              locked/unlocked zones, and saved level progress.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <i class="fa-solid fa-gamepad feature-icon"></i>
+            <h3 data-i18n="gb.f4t">3 Game Levels with Different Mechanics</h3>
+            <p data-i18n="gb.f4d">
+              Level 1 "Root Bridge" (spinning wheel quiz), Level 2 "Totem
+              Statue" (generative vs vegetative drag & drop), Level 3 "Ancient
+              Temple" (assembling flower part labels).
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <i class="fa-solid fa-circle-question feature-icon"></i>
+            <h3 data-i18n="gb.f5t">Interactive Quiz — 30 Questions</h3>
+            <p data-i18n="gb.f5d">
+              Multiple choice with a 15-second timer, progress bar, instant
+              feedback, educational facts, and a final score screen.
+            </p>
+          </div>
+
+          <div class="feature-item">
+            <i class="fa-solid fa-bullseye feature-icon"></i>
+            <h3 data-i18n="gb.f6t">Guide & Learning Targets</h3>
+            <p data-i18n="gb.f6d">
+              A How-to-Play page plus a CP & TP page that maps every mission to
+              specific learning objectives.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DEVELOPMENT PROCESS -->
+      <div class="section reveal">
+        <h2 class="section-title" data-i18n="ps.development">Development Process</h2>
+        <div class="text-content">
+          <p data-i18n="gb.dp1">
+            The project was developed with an iterative, responsive-first
+            approach, starting from the learning flow design (start → login →
+            main menu → material/game/quiz), then UI development, then coding
+            the interactivity, and finally testing across various screen sizes.
+            Each page was built one by one with full visual consistency — a
+            green-yellow nature palette, Fredoka One & Nunito fonts, and bee,
+            cloud, and star-shimmer animation themes — to maintain the
+            application's brand identity.
+          </p>
+          <p data-i18n="gb.dp2">
+            The separation of roles across pages (navigation between HTML files)
+            makes development modular and easy to fix; all image assets
+            (characters, maps, plants) and audio (correct/wrong effects) are
+            stored separately in the
+            <span class="highlight">pictures/</span> and
+            <span class="highlight">videos/</span> folders. Built with
+            <span class="highlight">HTML5</span>,
+            <span class="highlight">Tailwind CSS</span>, and vanilla
+            <span class="highlight">JavaScript</span>, the app uses the
+            <span class="highlight">localStorage API</span> to save student
+            identity and level progress without a server.
+          </p>
+        </div>
+      </div>
+
+      <!-- TECH STACK -->
+      <div class="section reveal">
+        <h2 class="section-title" data-i18n="ps.tech">Technologies Used</h2>
+        <div class="tech-tags">
+          <span class="tech-tag"><span>HTML5</span></span>
+          <span class="tech-tag"><span>Tailwind CSS</span></span>
+          <span class="tech-tag"><span>JavaScript</span></span>
+          <span class="tech-tag"><span>Font Awesome</span></span>
+          <span class="tech-tag"><span>Google Fonts</span></span>
+          <span class="tech-tag"><span>localStorage</span></span>
+          <span class="tech-tag"><span>CSS Animations</span></span>
+          <span class="tech-tag"><span>Local Assets</span></span>
+        </div>
+      </div>
+
+      <!-- CTA SECTION -->
+      <div class="cta-section section reveal">
+        <h2 class="cta-title" data-i18n="ps.cta">Interested in this Project?</h2>
+        <div class="cta-buttons">
+          <a href="/contact.html" class="btn" data-i18n="cta">Get In Touch</a>
+          <a href="/projects.html" class="btn" data-i18n="ps.other">View Other Projects</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Navbar scroll effect
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Scroll reveal animation
+      const reveals = document.querySelectorAll(".reveal");
+
+      const revealOnScroll = () => {
+        reveals.forEach((el) => {
+          const windowHeight = window.innerHeight;
+          const revealTop = el.getBoundingClientRect().top;
+          const revealPoint = 100;
+
+          if (revealTop < windowHeight - revealPoint) {
+            el.classList.add("active");
+          }
+        });
+      };
+
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll();
+    </script>
+  </body>
+</html>

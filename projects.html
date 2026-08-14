@@ -1,511 +1,507 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects — Nabil</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>Projects — Nabil</title>
+  <meta name="description" content="Portfolio projects by Muhammad Syafwan Nabil — Muslim Apps, Weather Dashboard, and more." />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <style>
-      :root {
-        --bg: #ffffff;
-        --text: #000000;
-        --active: #c8a27a;
-        --accent: #e8d5c0;
-        --gray: #666666;
-      }
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f7;
+      --surface2: #f0f0f0;
+      --text: #111111;
+      --text-muted: #666666;
+      --active: #c8a27a;
+      --active-glow: rgba(200,162,122,0.2);
+      --active-dim: rgba(200,162,122,0.07);
+      --border: rgba(0,0,0,0.08);
+    }
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60vw 50vh at 15% 55%, rgba(200,162,122,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50vw 50vh at 90% 25%, rgba(200,162,122,0.04) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,162,122,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,162,122,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", system-ui, sans-serif;
-      }
+    /* NAV */
+    .top-nav {
+      position: fixed; top: 5vh; right: 5vw;
+      display: flex; gap: 2rem; align-items: center;
+      opacity: 0; animation: fadeDown 0.8s ease 0.4s forwards; z-index: 100;
+    }
+    .back-btn {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--bg); background: var(--active);
+      text-decoration: none; padding: 0.55rem 1.4rem;
+      border-radius: 3px; border: 1.5px solid var(--active);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: transparent; color: var(--active);
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
+    }
+    .nav-link {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      position: relative; transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--active);
+      transition: width 0.35s ease;
+    }
+    .nav-link:hover { color: var(--active); }
+    .nav-link:hover::after { width: 100%; }
 
-      body {
-        background: var(--bg);
-        overflow-x: hidden;
-        min-height: 100vh;
-        position: relative;
-      }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(40px)}  to{opacity:1;transform:translateY(0)} }
 
-      /* ANIMATED BACKGROUND */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background:
-          radial-gradient(
-            circle at 20% 50%,
-            rgba(200, 162, 122, 0.04) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 80%,
-            rgba(200, 162, 122, 0.05) 0%,
-            transparent 50%
-          );
-        pointer-events: none;
-        animation: bgShift 15s ease-in-out infinite;
-        z-index: 0;
-      }
+    /* MAIN */
+    .container {
+      position: relative; max-width: 1400px;
+      margin: 0 auto; padding: 16vh 8vw 10vh; z-index: 1;
+    }
 
-      @keyframes bgShift {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.7;
-          transform: scale(1.1);
-        }
-      }
+    .page-label {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .page-label-line { width: 24px; height: 1px; background: var(--active); }
+    .page-label-text {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--active);
+    }
 
-      /* GRID PATTERN */
-      body::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(200, 162, 122, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(200, 162, 122, 0.03) 1px, transparent 1px);
-        background-size: 50px 50px;
-        pointer-events: none;
-        opacity: 0.5;
-        z-index: 0;
-      }
+    .page-title {
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 900; color: var(--text);
+      line-height: 0.95; letter-spacing: -0.02em;
+      opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+      margin-bottom: 4rem;
+    }
 
-      /* TOP NAVIGATION */
-      .top-nav {
-        position: fixed;
-        top: 5vh;
-        right: 5vw;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        opacity: 0;
-        animation: fadeInDown 1s ease 0.5s forwards;
-        z-index: 100;
-      }
+    /* PROJECTS GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
 
-      .back-btn {
-        font-size: clamp(0.7rem, 1vw, 0.85rem);
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--bg);
-        background: var(--active);
-        text-decoration: none;
-        padding: 0.6rem 1.5rem;
-        border-radius: 3px;
-        transition: all 0.3s ease;
-        border: 2px solid var(--active);
-      }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.45s cubic-bezier(0.19,1,0.22,1);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      position: relative;
+      cursor: pointer;
+    }
+    .project-card:nth-child(1) { animation-delay: 0.6s; }
+    .project-card:nth-child(2) { animation-delay: 0.7s; }
+    .project-card:nth-child(3) { animation-delay: 0.8s; }
+    .project-card:nth-child(4) { animation-delay: 0.9s; }
+    .project-card:nth-child(5) { animation-delay: 1.0s; }
+    .project-card:nth-child(6) { animation-delay: 1.1s; }
+    .project-card:nth-child(7) { animation-delay: 1.2s; }
+    .project-card:nth-child(8) { animation-delay: 1.3s; }
 
-      .back-btn:hover {
-        background: transparent;
-        color: var(--active);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(200, 162, 122, 0.3);
-      }
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(200,162,122,0.3);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,162,122,0.1);
+    }
 
-      .nav-link {
-        font-size: clamp(0.7rem, 1vw, 0.85rem);
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--gray);
-        text-decoration: none;
-        position: relative;
-        transition: color 0.3s ease;
-      }
+    .card-link {
+      position: absolute; inset: 0; z-index: 10; cursor: pointer;
+    }
 
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: var(--active);
-        transition: width 0.3s ease;
-      }
+    /* IMAGE AREA */
+    .project-image {
+      width: 100%;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* ART AREA */
+    .project-image-art {
+      width: 100%; height: 100%;
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.7rem;
+      background:
+        radial-gradient(circle at 75% 18%, rgba(200,162,122,0.22), transparent 55%),
+        linear-gradient(135deg, #f5f0ea 0%, #e9e1d7 100%);
+      transition: transform 0.6s ease;
+    }
+    .project-card:hover .project-image-art { transform: scale(1.03); }
+    .art-num {
+      font-size: 2.6rem; font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,162,122,0.5);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      transition: all 0.4s ease;
+    }
+    .project-card:hover .art-num {
+      -webkit-text-stroke: 1px rgba(200,162,122,0.85);
+      transform: scale(1.08);
+    }
+    .art-title {
+      font-size: 0.82rem; font-weight: 800;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--active);
+      text-align: center;
+      padding: 0 1rem;
+    }
 
-      .nav-link:hover {
-        color: var(--active);
-      }
+    /* IMAGE OVERLAY */
+    .image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.6) 100%);
+    }
+    .image-tag {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--active); background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(200,162,122,0.3);
+      padding: 4px 10px; border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .image-arrow {
+      position: absolute; bottom: 12px; right: 12px;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(200,162,122,0.15);
+      border: 1px solid rgba(200,162,122,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--active);
+      opacity: 0; transform: scale(0.8);
+      transition: all 0.35s ease;
+      backdrop-filter: blur(8px);
+    }
+    .project-card:hover .image-arrow { opacity: 1; transform: scale(1); }
 
-      .nav-link:hover::after {
-        width: 100%;
-      }
+    /* CONTENT */
+    .project-content { padding: 1.5rem; }
+    .project-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+    .project-num {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--active);
+    }
+    .project-year {
+      font-size: 0.65rem; font-weight: 500;
+      color: var(--text-muted);
+    }
+    .project-title {
+      font-size: 1.25rem; font-weight: 800;
+      color: var(--text); margin-bottom: 0.7rem;
+      line-height: 1.2;
+    }
+    .project-desc {
+      font-size: 0.88rem; line-height: 1.65;
+      color: var(--text-muted); margin-bottom: 1.2rem;
+    }
+    .project-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .tag {
+      padding: 3px 10px; font-size: 0.68rem; font-weight: 600;
+      color: var(--active);
+      background: var(--active-dim);
+      border: 1px solid rgba(200,162,122,0.15);
+      border-radius: 20px; text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
 
-      @keyframes fadeInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+    /* DECO */
+    .number-deco {
+      position: fixed; bottom: 5vh; right: 5vw;
+      font-size: clamp(7rem, 14vw, 11rem); font-weight: 900;
+      color: transparent; -webkit-text-stroke: 1px rgba(200,162,122,0.06);
+      line-height: 1; pointer-events: none; z-index: 0; user-select: none;
+    }
 
-      /* MAIN CONTENT */
-      .container {
-        position: relative;
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 15vh 8vw 10vh;
-        z-index: 1;
-      }
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .container { padding: 14vh 5vw 8vh; }
+      .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .number-deco { display: none; }
+      .top-nav { top: 3vh; right: 5vw; gap: 1rem; }
+      .back-btn { font-size: 0.65rem; padding: 0.45rem 1rem; }
+    }
+  </style>
+  <script src="lang.js" defer></script>
+</head>
+<body>
 
-      .page-title {
-        font-size: clamp(4rem, 10vw, 7rem);
-        font-weight: 900;
-        color: var(--text);
-        margin-bottom: 2rem;
-        opacity: 0;
-        animation: fadeInUp 1s ease 0.8s forwards;
-        text-shadow:
-          2px 2px 0 rgba(0, 0, 0, 0.1),
-          4px 4px 0 rgba(0, 0, 0, 0.08),
-          6px 6px 0 rgba(0, 0, 0, 0.06),
-          8px 8px 20px rgba(0, 0, 0, 0.15);
-      }
+  <nav class="top-nav">
+    <a href="index.html" class="back-btn">← Menu</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link" target="_blank">GitHub</a>
+  </nav>
 
-      .page-number {
-        font-size: clamp(1rem, 2vw, 1.3rem);
-        font-weight: 700;
-        color: var(--active);
-        letter-spacing: 0.1em;
-        margin-bottom: 0.5rem;
-        opacity: 0;
-        animation: fadeInUp 1s ease 0.6s forwards;
-      }
+  <div class="container">
+    <div class="page-label">
+      <span class="page-label-line"></span>
+      <span class="page-label-text" data-i18n="prj.label">03 — Projects</span>
+    </div>
+    <h1 class="page-title" data-i18n="prj.title">MY WORK.</h1>
 
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 3rem;
-        margin-top: 4rem;
-      }
+    <div class="projects-grid">
 
-      .project-card {
-        background: rgba(200, 162, 122, 0.03);
-        border: 1px solid rgba(200, 162, 122, 0.1);
-        border-radius: 8px;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        opacity: 0;
-        animation: fadeInUp 1s ease forwards;
-        cursor: pointer;
-      }
-      .card-link {
-        position: absolute; /* Supaya melayang */
-        inset: 0; /* Shortcut untuk top:0, right:0, bottom:0, left:0 */
-        z-index: 10; /* Supaya dia ada di lapisan paling atas */
-        cursor: pointer; /* Mengubah kursor jadi telunjuk */
-      }
-
-      .project-card:nth-child(1) {
-        animation-delay: 1s;
-      }
-      .project-card:nth-child(2) {
-        animation-delay: 1.2s;
-      }
-      .project-card:nth-child(3) {
-        animation-delay: 1.4s;
-      }
-      .project-card:nth-child(4) {
-        animation-delay: 1.6s;
-      }
-      .project-card:nth-child(5) {
-        animation-delay: 1.8s;
-      }
-      .project-card:nth-child(6) {
-        animation-delay: 2s;
-      }
-
-      .project-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(200, 162, 122, 0.2);
-        border-color: var(--active);
-      }
-
-      .project-image {
-        width: 100%;
-        height: 250px;
-        background: linear-gradient(
-          135deg,
-          var(--accent) 0%,
-          var(--active) 100%
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 4rem;
-        font-weight: 900;
-        color: rgba(255, 255, 255, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .project-image::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          45deg,
-          transparent 30%,
-          rgba(255, 255, 255, 0.1) 50%,
-          transparent 70%
-        );
-        animation: shimmer 3s infinite;
-      }
-
-      @keyframes shimmer {
-        0% {
-          transform: translateX(-100%);
-        }
-        100% {
-          transform: translateX(100%);
-        }
-      }
-
-      .project-content {
-        padding: 2rem;
-      }
-
-      .project-number {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--active);
-        letter-spacing: 0.1em;
-        margin-bottom: 0.5rem;
-      }
-
-      .project-title {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: var(--text);
-        margin-bottom: 1rem;
-      }
-
-      .project-desc {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: var(--gray);
-        margin-bottom: 1.5rem;
-      }
-
-      .project-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-
-      .tag {
-        padding: 0.4rem 1rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--active);
-        background: rgba(200, 162, 122, 0.1);
-        border-radius: 20px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(60px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* DECORATIVE NUMBER */
-      .number-deco {
-        position: fixed;
-        bottom: 5vh;
-        right: 5vw;
-        font-size: clamp(8rem, 15vw, 12rem);
-        font-weight: 900;
-        color: var(--accent);
-        opacity: 0.3;
-        line-height: 1;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      /* MOBILE */
-      @media (max-width: 768px) {
-        .container {
-          padding: 12vh 5vw 5vh;
-        }
-
-        .top-nav {
-          top: 3vh;
-          right: 5vw;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .back-btn {
-          font-size: 0.65rem;
-          padding: 0.5rem 1rem;
-        }
-
-        .nav-link {
-          font-size: 0.65rem;
-        }
-
-        .projects-grid {
-          grid-template-columns: 1fr;
-          gap: 2rem;
-        }
-
-        .number-deco {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="top-nav">
-      <a href="index.html" class="back-btn">← Back to Menu</a>
-      <a href="contact.html" class="nav-link">Resume</a>
-      <a
-        href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/"
-        class="nav-link"
-        >LinkedIn</a
-      >
-      <a href="https://github.com/Shonabil" class="nav-link">GitHub</a>
-    </nav>
-
-    <div class="container">
-      <div class="page-number">03 — PROJECTS</div>
-      <h1 class="page-title">MY WORK</h1>
-
-      <div class="projects-grid">
-        <div class="project-card">
-          <a
-            href="project/muslimapps.html"
-            class="card-link"
-            title="View Project"
-          ></a>
-          <div class="project-image">
-            <p>MUSLIMAPPS</p>
+      <!-- Muslim Apps -->
+      <div class="project-card">
+        <a href="project/muslimapps.html" class="card-link" title="View Muslim Apps"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">01</span>
+            <span class="art-title">MUSLIM APPS</span>
           </div>
-          <div class="project-content">
-            <div class="project-number">Project 01</div>
-            <h3 class="project-title">Muslim Apps</h3>
-            <p class="project-desc">
-              Comprehensive Islamic application offering prayer times, salat
-              times, Quran readings, articles and daily duas.
-            </p>
-          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag" data-i18n="prj.tag1">Project 01</span>
+          <span class="image-arrow">→</span>
         </div>
-
-        <div class="project-card">
-          <a
-            href="project/portofolio.html"
-            class="card-link"
-            title="View Project"
-          ></a>
-          <div class="project-image">
-            <p>PORTOFOLIO</p>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num">01 — Muslim Apps</span>
+            <span class="project-year">2024</span>
           </div>
-          <div class="project-content">
-            <div class="project-number">Project 02</div>
-            <h3 class="project-title">Portofolio</h3>
-            <p class="project-desc">
-              Personal portfolio website showcasing projects, skills, and
-              contact information with a modern and responsive design.
-            </p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <a
-            href="project/portofolio1.html"
-            class="card-link"
-            title="View Project"
-          ></a>
-          <div class="project-image">
-            <p>PORTOFOLIO</p>
-          </div>
-          <div class="project-content">
-            <div class="project-number">Project 03</div>
-            <h3 class="project-title">Portofolio</h3>
-            <p class="project-desc">
-              Personal portfolio website showcasing projects, skills, and
-              contact information with a modern and responsive design.
-            </p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <a
-            href="project/minumair.html"
-            class="card-link"
-            title="View Project"
-          ></a>
-          <div class="project-image">AQUATRACK</div>
-          <div class="project-content">
-            <div class="project-number">PROJECT 04</div>
-            <h3 class="project-title">AquaTrack</h3>
-            <p class="project-desc">
-              AquaTrack is a smart water reminder app designed to help you
-              monitor and achieve your daily hydration goals. Track your intake,
-              get timely reminders, and stay healthy with ease.
-            </p>
-          </div>
-        </div>
-
-        <div class="project-card">
-            <a
-            href="project/weather.html"
-            class="card-link"
-            title="View Project"
-          ></a>
-          <div class="project-image">WEATHER DASHBOARD</div>
-          <div class="project-content">
-            <div class="project-number">PROJECT 05</div>
-            <h3 class="project-title">Weather Dashboard</h3>
-            <p class="project-desc">
-              Real-time weather app with beautiful visualizations, forecasts,
-              and location-based updates.
-            </p>
-          </div>
-        </div>
-
-        <div class="project-card">
-           <a
-            href="project/wanderlog.html"
-            class="card-link"
-            title="View Project"
-          ></a>
-          <div class="project-image">TRAVEL PLAN</div>
-          <div class="project-content">
-            <div class="project-number">PROJECT 06</div>
-            <h3 class="project-title">Travel plan</h3>
-            <p class="project-desc">
-              Feature-rich social platform with posts, comments, likes, and
-              real-time notifications.
-            </p>
+          <h3 class="project-title">Muslim Apps</h3>
+          <p class="project-desc" data-i18n="prj.d1">Comprehensive Islamic application offering prayer times, salat times, Quran readings, articles and daily duas.</p>
+          <div class="project-tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Laravel</span>
+            <span class="tag">MySQL</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="number-deco">03</div>
-  </body>
+      <!-- Weather Dashboard -->
+      <div class="project-card">
+        <a href="project/weather.html" class="card-link" title="View Weather Dashboard"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">02</span>
+            <span class="art-title">WEATHER DASHBOARD</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag" data-i18n="prj.tag2">Project 02</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num" data-i18n="prj.n2">02 — Web App</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Weather Dashboard</h3>
+          <p class="project-desc" data-i18n="prj.d2">Real-time weather app with beautiful visualizations, forecasts, and location-based updates using external APIs.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Weather API</span>
+            <span class="tag">CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BmDiesel -->
+      <div class="project-card">
+        <a href="project/bmdiesel.html" class="card-link" title="View BmDiesel"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">03</span>
+            <span class="art-title">BMDIESEL</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag" data-i18n="prj.tag3">Project 03</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num" data-i18n="prj.n3">03 — Web App</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">BmDiesel</h3>
+          <p class="project-desc" data-i18n="prj.d3">Service management system for diesel engine repair workshops with customer portal, phase tracking, payments, invoices, and reports.</p>
+          <div class="project-tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Blade</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Pembelajaran -->
+      <div class="project-card">
+        <a href="project/gamepembelajaran.html" class="card-link" title="View Game Pembelajaran"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">04</span>
+            <span class="art-title">GAME PEMBELAJARAN</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag">Project 04</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num">04 — Game</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Game Pembelajaran</h3>
+          <p class="project-desc" data-i18n="prj.d4">Interactive web-based learning app "Penjelajah Hijau" for elementary IPAS on plant reproduction with adventure map, games, and quizzes.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">HTML5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yayasan Mufid -->
+      <div class="project-card">
+        <a href="project/yayasamufid.html" class="card-link" title="View Yayasan Mufid"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">05</span>
+            <span class="art-title">YAYASAN MUFID</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag">Project 05</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num">05 — Website</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Yayasan Mufid</h3>
+          <p class="project-desc">Official foundation website present profiles, programs, and news with a simple admin interface.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Admin</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AquaTrack -->
+      <div class="project-card">
+        <a href="project/aquatrack.html" class="card-link" title="View AquaTrack"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">06</span>
+            <span class="art-title">AQUATRACK</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag">Project 06</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num">06 — Mobile App</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">AquaTrack</h3>
+          <p class="project-desc">Smart mobile hydration tracking app with personalized goals, reminders, and analytics.</p>
+          <div class="project-tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Dart</span>
+            <span class="tag">SQLite</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flowly -->
+      <div class="project-card">
+        <a href="project/timeandtodo.html" class="card-link" title="View Flowly"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">07</span>
+            <span class="art-title">FLOWLY</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag">Project 07</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num">07 — Web App</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Flowly</h3>
+          <p class="project-desc" data-i18n="prj.d7">All-in-one personal productivity dashboard (Laravel 12) with tasks & projects, calendar, finance, and a focus timer.</p>
+          <div class="project-tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">SQLite</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Monopoli -->
+      <div class="project-card">
+        <a href="project/monopoligame.html" class="card-link" title="View Game Monopoli"></a>
+        <div class="project-image">
+          <div class="project-image-art">
+            <span class="art-num">08</span>
+            <span class="art-title">GAME MONOPOLI</span>
+          </div>
+          <div class="image-overlay"></div>
+          <span class="image-tag">Project 08</span>
+          <span class="image-arrow">→</span>
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span class="project-num">08 — Game</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Game Monopoli</h3>
+          <p class="project-desc">The classic monopoly board game recreated in the browser with a full economy system.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="number-deco">03</div>
+
+</body>
 </html>

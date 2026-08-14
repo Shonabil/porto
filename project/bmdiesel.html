@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Website — Project Detail</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <title>BmDiesel — Project Detail</title>
+    <meta name="description" content="BmDiesel — service management system for diesel repair workshops with customer portal, phase tracking, payments, invoices, and reports." />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap"
@@ -72,7 +74,8 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       }
 
-      .back-btn, .nav-link {
+      .back-btn,
+      .nav-link {
         font-size: 0.8rem;
         font-weight: 700;
         letter-spacing: 0.05em;
@@ -88,7 +91,8 @@
         overflow: hidden;
       }
 
-      .back-btn::before, .nav-link::before {
+      .back-btn::before,
+      .nav-link::before {
         content: "";
         position: absolute;
         top: 50%;
@@ -97,17 +101,21 @@
         height: 0;
         border-radius: 50%;
         background: var(--accent);
-        transition: width 0.4s ease, height 0.4s ease;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
         transform: translate(-50%, -50%);
         z-index: -1;
       }
 
-      .back-btn:hover::before, .nav-link:hover::before {
+      .back-btn:hover::before,
+      .nav-link:hover::before {
         width: 300px;
         height: 300px;
       }
 
-      .back-btn:hover, .nav-link:hover {
+      .back-btn:hover,
+      .nav-link:hover {
         border-color: var(--accent);
         color: #000000;
         transform: translateY(-2px);
@@ -120,32 +128,49 @@
         height: 90vh;
         width: 100%;
         overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 18%, rgba(200,162,122,0.28), transparent 55%),
+          linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .hero-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+      .hero-text-inner {
         position: relative;
-        z-index: 1;
-        animation: slowZoom 20s ease-in-out infinite alternate;
+        z-index: 5;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        padding: 0 2rem;
       }
 
-      @keyframes slowZoom {
-        from { transform: scale(1); }
-        to { transform: scale(1.05); }
+      .hero-num {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 900;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(232,213,192,0.7);
+        line-height: 1;
+        letter-spacing: 0.06em;
       }
 
-      .hero::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 40%;
-        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-        z-index: 2;
+      .hero-title {
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: 0.06em;
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .hero-sub {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--active);
       }
 
       .hero-overlay {
@@ -169,7 +194,7 @@
         text-transform: uppercase;
         border-radius: 50px;
         padding: 0.8rem 2.5rem;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
         backdrop-filter: blur(10px);
         animation: fadeUpBadge 0.8s ease 0.5s forwards;
         opacity: 0;
@@ -177,9 +202,12 @@
       }
 
       @keyframes fadeUpBadge {
-        to { opacity: 1; transform: translateY(0); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-      
+
       /* MAIN CONTAINER */
       .container {
         position: relative;
@@ -197,11 +225,21 @@
         animation: fadeInUp 0.8s ease forwards;
       }
 
-      .section:nth-child(1) { animation-delay: 0.1s; }
-      .section:nth-child(2) { animation-delay: 0.2s; }
-      .section:nth-child(3) { animation-delay: 0.3s; }
-      .section:nth-child(4) { animation-delay: 0.4s; }
-      .section:nth-child(5) { animation-delay: 0.5s; }
+      .section:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .section:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .section:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .section:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .section:nth-child(5) {
+        animation-delay: 0.5s;
+      }
 
       .section-title {
         font-size: clamp(1.8rem, 3vw, 2.8rem);
@@ -226,8 +264,12 @@
       }
 
       @keyframes slideIn {
-        from { width: 0; }
-        to { width: 80px; }
+        from {
+          width: 0;
+        }
+        to {
+          width: 80px;
+        }
       }
 
       .text-content {
@@ -237,7 +279,7 @@
         max-width: 850px;
       }
 
-      .text-content p { 
+      .text-content p {
         margin-bottom: 1.5rem;
         transition: color 0.3s ease;
       }
@@ -291,7 +333,12 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(200, 162, 122, 0.1), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(200, 162, 122, 0.1),
+          transparent
+        );
         transition: left 0.6s ease;
       }
 
@@ -361,7 +408,9 @@
         background: var(--accent);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: width 0.4s ease, height 0.4s ease;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
         z-index: 0;
       }
 
@@ -380,120 +429,6 @@
       .tech-tag span {
         position: relative;
         z-index: 1;
-      }
-
-      /* GALLERY */
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-        margin-top: 3rem;
-      }
-
-      .gallery-item {
-        border-radius: 16px;
-        overflow: hidden;
-        aspect-ratio: 16/10;
-        background-color: #eee;
-        position: relative;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        transition: all 0.4s ease;
-        cursor: zoom-in;
-      }
-
-      .gallery-item::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(45deg, rgba(200, 162, 122, 0.3), transparent);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      .gallery-item:hover::after {
-        opacity: 1;
-      }
-
-      .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        display: block;
-        pointer-events: none;
-      }
-
-      .gallery-item:hover {
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        transform: translateY(-5px);
-      }
-
-      .gallery-item:hover img {
-        transform: scale(1.1);
-      }
-
-      /* LIGHTBOX */
-      .lightbox {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-
-      .lightbox.active {
-        opacity: 1;
-        pointer-events: all;
-        backdrop-filter: blur(5px);
-      }
-
-      .lightbox-img {
-        max-width: 90%;
-        max-height: 90vh;
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-        border: 2px solid #fff;
-        transform: scale(0.9);
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .lightbox.active .lightbox-img {
-        transform: scale(1);
-      }
-
-      .lightbox-close {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        color: #fff;
-        font-size: 3rem;
-        cursor: pointer;
-        font-family: sans-serif;
-        line-height: 1;
-        transition: all 0.3s ease;
-        z-index: 1001;
-        background: rgba(0,0,0,0.2);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .lightbox-close:hover {
-        color: var(--active);
-        background: #fff;
-        transform: rotate(90deg);
       }
 
       /* CTA SECTION */
@@ -532,8 +467,13 @@
       }
 
       @keyframes float {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(30px, -30px); }
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(30px, -30px);
+        }
       }
 
       .cta-title {
@@ -583,7 +523,9 @@
         background: var(--accent);
         transform: translate(-50%, -50%);
         border-radius: 8px;
-        transition: width 0.4s ease, height 0.4s ease;
+        transition:
+          width 0.4s ease,
+          height 0.4s ease;
         z-index: -1;
       }
 
@@ -600,8 +542,14 @@
       }
 
       @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(50px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       /* SCROLL REVEAL */
@@ -618,144 +566,169 @@
 
       /* MOBILE */
       @media (max-width: 768px) {
-        .hero { height: 60vh; }
-        .container { padding: 4vh 1.5rem; }
-        .top-nav { 
-          padding: 1.2rem; 
+        .hero {
+          height: 60vh;
+        }
+        .container {
+          padding: 4vh 1.5rem;
+        }
+        .top-nav {
+          padding: 1.2rem;
           flex-direction: column;
           gap: 1rem;
           align-items: stretch;
         }
-        
+
         .top-nav > div {
           justify-content: center;
         }
-        
-        .features-grid { 
+
+        .features-grid {
           grid-template-columns: 1fr;
           gap: 2rem;
         }
-        
-        .gallery { 
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
+
+        .cta-section {
+          padding: 4rem 2rem;
         }
-        
-        .cta-section { padding: 4rem 2rem; }
-        .cta-buttons { 
+        .cta-buttons {
           flex-direction: column;
           gap: 1rem;
         }
-        .btn { 
-          width: 100%; 
-          text-align: center; 
+        .btn {
+          width: 100%;
+          text-align: center;
         }
-        
-        .section { margin-bottom: 5rem; }
-        
+
+        .section {
+          margin-bottom: 5rem;
+        }
+
         .tech-tags {
           justify-content: center;
         }
       }
     </style>
+    <script src="../lang.js" defer></script>
   </head>
   <body>
     <nav class="top-nav" id="navbar">
-      <a href="/projects.html" class="back-btn">← Back to Projects</a>
-      <div style="display: flex; gap: 1.5rem;">
-        <a href="/index.html" class="nav-link">Menu</a>
-        <a href="/contact.html" class="nav-link">Contact</a>
+      <a href="/projects.html" class="back-btn" data-i18n="ps.back">← Back to Projects</a>
+      <div style="display: flex; gap: 1.5rem">
+        <a href="/index.html" class="nav-link" data-i18n="ps.menu">Menu</a>
+        <a href="/contact.html" class="nav-link" data-i18n="ps.contact">Contact</a>
       </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero">
-      <img
-        src="../images/pt1.png"
-        alt="Portfolio Website Hero"
-        class="hero-image"
-        onerror="this.src='https://picsum.photos/seed/porthero/1600/900'"
-      />
-      
-      <div class="hero-overlay">
-        <div class="project-badge">PORTFOLIO WEBSITE</div>
+      <div class="hero-text-inner">
+        <div class="hero-num">03</div>
+        <div class="hero-title">BmDiesel</div>
+        <div class="hero-sub">Service Management · Customer Portal · Laravel</div>
       </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <div class="container">
-      
       <!-- OVERVIEW SECTION -->
       <div class="section reveal">
-        <h2 class="section-title">Project Overview</h2>
+        <h2 class="section-title" data-i18n="ps.overview">Project Overview</h2>
         <div class="text-content">
-          <p>
-            <span class="highlight">Portfolio Website</span> is a sophisticated personal portfolio featuring a minimalist aesthetic with a warm cream and beige color palette. This design emphasizes elegant typography, smooth transitions, and a numbered navigation system that guides visitors through different sections seamlessly.
+          <p data-i18n="bm.ov1">
+            <span class="highlight">BmDiesel</span> is a service management
+            information system for diesel engine repair workshops that transforms
+            manual paper-based record-keeping into a centralized digital platform.
+            Used by admin and workshop staff, it records every service job in full
+            — from unit and engine data, replaced components, estimated and actual
+            costs, to warranty dates — while providing customers with a dedicated
+            portal to monitor the status of their unit in real time.
           </p>
-          <p>
-            The website showcases a unique approach to portfolio presentation with large outlined typography, subtle animations, and a clean layout that puts the focus on content. Built with modern web standards, it delivers an exceptional user experience across all devices while maintaining a distinctive visual identity that stands out from conventional portfolio designs.
+          <p data-i18n="bm.ov2">
+            The main benefits of the system are transparency and operational
+            efficiency. Customers can see service progress in real time through
+            work phases, receive automatic notifications when their service is
+            finished, and make payments by uploading transfer proof that is
+            verified directly by the admin. For the workshop, all data is stored
+            centrally, invoices can be printed and downloaded as PDF, service
+            reports can be exported, and payments are validated with a clear
+            verification flow — reducing recording errors and speeding up
+            service.
           </p>
         </div>
       </div>
 
       <!-- FEATURE SECTION -->
       <div class="section reveal">
-        <h2 class="section-title">Key Features</h2>
+        <h2 class="section-title" data-i18n="ps.features">Key Features</h2>
 
         <div class="text-content">
-          <p>
-            A comprehensive showcase with features that are
-            <span class="highlight">elegant</span>,
-            <span class="highlight">minimalist</span>, and designed to create lasting impressions.
+          <p data-i18n="bm.featIntro">
+            A reporting platform with features that are
+            <span class="highlight">modern</span>,
+            <span class="highlight">structured</span>, and easy to adopt.
           </p>
         </div>
 
         <div class="features-grid">
           <div class="feature-item">
-            <i class="fa-solid fa-palette feature-icon"></i>
-            <h3>Elegant Design System</h3>
-            <p>
-              Sophisticated cream and beige color palette with carefully crafted typography hierarchy and visual balance.
+            <i class="fa-solid fa-clipboard-list feature-icon"></i>
+            <h3 data-i18n="bm.f1t">Complete Job Service Management</h3>
+            <p data-i18n="bm.f1d">
+              Service recording with more than 30 fields (customer identity,
+              machine/unit specifications, spare parts, estimated & actual
+              costs, PO/receipt numbers, warranty period), complete with edit
+              and delete.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-list-ol feature-icon"></i>
-            <h3>Numbered Navigation</h3>
-            <p>
-              Intuitive section numbering (01-05) that guides visitors through your portfolio journey with clarity and style.
+            <i class="fa-solid fa-user feature-icon"></i>
+            <h3 data-i18n="bm.f2t">Customer Portal</h3>
+            <p data-i18n="bm.f2d">
+              Customers monitor their service list, progress, bills, and photo
+              documentation of their unit through a secure personal dashboard.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-text-width feature-icon"></i>
-            <h3>Large Typography</h3>
-            <p>
-              Bold, outlined text treatments that create visual impact while maintaining readability and sophistication.
+            <i class="fa-solid fa-diagram-project feature-icon"></i>
+            <h3 data-i18n="bm.f3t">Work Phase Tracking</h3>
+            <p data-i18n="bm.f3d">
+              Progress is visualized in 7 phases (Initial Analysis →
+              Disassembly → Cleaning → Waiting for Parts → Assembly → Testing →
+              Completed) with automatic status (Pending / In Progress /
+              Completed).
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-wand-magic-sparkles feature-icon"></i>
-            <h3>Subtle Animations</h3>
-            <p>
-              Delicate transitions and hover effects that enhance user interaction without overwhelming the content.
+            <i class="fa-solid fa-credit-card feature-icon"></i>
+            <h3 data-i18n="bm.f4t">Payment & Verification</h3>
+            <p data-i18n="bm.f4d">
+              Payment page with transfer proof upload; admin reviews, approves,
+              or rejects with notes; bill status changes to PAID / PENDING
+              VERIFICATION / UNPAID and the customer gets notified.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
-            <h3>Responsive Layout</h3>
-            <p>
-              Fully optimized for all screen sizes with fluid typography and adaptive spacing that maintains design integrity.
+            <i class="fa-solid fa-file-invoice-dollar feature-icon"></i>
+            <h3 data-i18n="bm.f5t">Invoice & Reports</h3>
+            <p data-i18n="bm.f5d">
+              Print-ready invoices, PDF downloads (dompdf), service reports with
+              period/status filters, and CSV export.
             </p>
           </div>
 
           <div class="feature-item">
-            <i class="fa-solid fa-eye feature-icon"></i>
-            <h3>Clean Aesthetics</h3>
-            <p>
-              Minimalist approach with generous whitespace, allowing your work and content to be the primary focus.
+            <i class="fa-solid fa-bell feature-icon"></i>
+            <h3 data-i18n="bm.f6t">Notifications & Security</h3>
+            <p data-i18n="bm.f6d">
+              Database notifications with real-time polling for admin (new jobs,
+              payments) and customers (progress, done, payment
+              accepted/rejected), plus role-based access control (admin/user)
+              and data ownership protection (IDOR).
             </p>
           </div>
         </div>
@@ -763,168 +736,86 @@
 
       <!-- DEVELOPMENT PROCESS -->
       <div class="section reveal">
-        <h2 class="section-title">Development Process</h2>
+        <h2 class="section-title" data-i18n="ps.development">Development Process</h2>
         <div class="text-content">
-          <p>
-            The design philosophy centered on creating a portfolio that feels both contemporary and timeless. Extensive research into minimalist design principles, color theory, and typography led to the selection of the warm cream and beige palette that creates a welcoming yet professional atmosphere.
+          <p data-i18n="bm.dp1">
+            The project was developed iteratively using the Laravel 12 framework
+            with an MVC architecture. The first stage was designing the database
+            structure through migrations — covering the users, service_jobs,
+            service_photos, and notifications tables — as a clean, easy-to-develop
+            data foundation. After that, the core features were built step by
+            step: job service management, customer portal, payment flow, then
+            reports and invoices.
           </p>
-          <p>
-            Built with <span class="highlight">HTML5</span>, <span class="highlight">CSS3</span>, and <span class="highlight">JavaScript</span>, the website prioritizes performance and accessibility. The numbered navigation system was carefully crafted to provide clear wayfinding, while the large outlined typography creates memorable visual anchors throughout the experience. Each animation was fine-tuned to enhance rather than distract from the content.
+          <p data-i18n="bm.dp2">
+            The development started from backend design and data structure, then
+            continued with front-end integration using
+            <span class="highlight">Blade</span>,
+            <span class="highlight">Tailwind CSS</span>, and
+            <span class="highlight">Alpine.js</span> compiled through
+            <span class="highlight">Vite</span>. Each module was functionally
+            tested before adding the next, so the application grows modularly and
+            stays maintainable. The interface is responsive for both desktop and
+            mobile devices, and the application is ready to run in a production
+            environment with a database schema managed through migrations.
           </p>
         </div>
       </div>
 
       <!-- TECH STACK -->
       <div class="section reveal">
-        <h2 class="section-title">Technologies Used</h2>
+        <h2 class="section-title" data-i18n="ps.tech">Technologies Used</h2>
         <div class="tech-tags">
-          <span class="tech-tag"><span>HTML5</span></span>
-          <span class="tech-tag"><span>CSS3</span></span>
-          <span class="tech-tag"><span>JavaScript</span></span>
-          <span class="tech-tag"><span>Responsive Design</span></span>
-          <span class="tech-tag"><span>CSS Animations</span></span>
-          <span class="tech-tag"><span>GitHub</span></span>
-          <span class="tech-tag"><span>Google Fonts</span></span>
-        </div>
-      </div>
-
-      <!-- GALLERY -->
-      <div class="section reveal">
-        <h2 class="section-title">Project Gallery</h2>
-        <div class="gallery">
-          <div class="gallery-item">
-            <img 
-              src="../images/pt1.png" 
-              alt="Homepage Design" 
-              onerror="this.src='https://picsum.photos/seed/porthome/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img 
-              src="../images/pt2.png" 
-              alt="Projects Section" 
-              onerror="this.src='https://picsum.photos/seed/portprojects/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img 
-              src="../images/pt3.png" 
-              alt="About Section" 
-              onerror="this.src='https://picsum.photos/seed/portabout/800/500'"
-            />
-          </div>
-
-          <div class="gallery-item">
-            <img 
-              src="../images/pt4.png" 
-              alt="Contact Section" 
-              onerror="this.src='https://picsum.photos/seed/portcontact/800/500'"
-            />
-          </div>
-          <div class="gallery-item">
-            <img 
-              src="../images/pt5.png" 
-              alt="Contact Section" 
-              onerror="this.src='https://picsum.photos/seed/portcontact/800/500'"
-            />
-          </div>
+          <span class="tech-tag"><span>PHP 8.4</span></span>
+          <span class="tech-tag"><span>Laravel 12</span></span>
+          <span class="tech-tag"><span>MySQL</span></span>
+          <span class="tech-tag"><span>SQLite</span></span>
+          <span class="tech-tag"><span>Blade</span></span>
+          <span class="tech-tag"><span>Tailwind CSS</span></span>
+          <span class="tech-tag"><span>Alpine.js</span></span>
+          <span class="tech-tag"><span>Vite</span></span>
+          <span class="tech-tag"><span>dompdf</span></span>
         </div>
       </div>
 
       <!-- CTA SECTION -->
       <div class="cta-section section reveal">
-        <h2 class="cta-title">Interested in this Project?</h2>
+        <h2 class="cta-title" data-i18n="ps.cta">Interested in this Project?</h2>
         <div class="cta-buttons">
-          <a href="/contact.html" class="btn">Get In Touch</a>
-          <a href="/projects.html" class="btn">View Other Projects</a>
+          <a href="/contact.html" class="btn" data-i18n="cta">Get In Touch</a>
+          <a href="/projects.html" class="btn" data-i18n="ps.other">View Other Projects</a>
         </div>
       </div>
-
     </div>
 
     <script>
       // Navbar scroll effect
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
         if (window.scrollY > 100) {
-          navbar.classList.add('scrolled');
+          navbar.classList.add("scrolled");
         } else {
-          navbar.classList.remove('scrolled');
+          navbar.classList.remove("scrolled");
         }
       });
 
       // Scroll reveal animation
-      const reveals = document.querySelectorAll('.reveal');
-      
+      const reveals = document.querySelectorAll(".reveal");
+
       const revealOnScroll = () => {
-        reveals.forEach(el => {
+        reveals.forEach((el) => {
           const windowHeight = window.innerHeight;
           const revealTop = el.getBoundingClientRect().top;
           const revealPoint = 100;
-          
+
           if (revealTop < windowHeight - revealPoint) {
-            el.classList.add('active');
+            el.classList.add("active");
           }
         });
       };
 
-      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener("scroll", revealOnScroll);
       revealOnScroll();
-
-      // Lightbox functionality
-      const galleryItems = document.querySelectorAll('.gallery-item');
-
-      galleryItems.forEach(item => {
-        const img = item.querySelector('img');
-
-        item.addEventListener('click', () => {
-          const src = img.src;
-          const alt = img.alt;
-          createLightbox(src, alt);
-        });
-      });
-
-      function createLightbox(src, alt) {
-        const lightbox = document.createElement('div');
-        lightbox.classList.add('lightbox');
-
-        const image = document.createElement('img');
-        image.src = src;
-        image.alt = alt;
-        image.classList.add('lightbox-img');
-
-        const closeBtn = document.createElement('span');
-        closeBtn.innerHTML = '&times;';
-        closeBtn.classList.add('lightbox-close');
-        closeBtn.title = 'Close (Esc)';
-
-        lightbox.appendChild(image);
-        lightbox.appendChild(closeBtn);
-        document.body.appendChild(lightbox);
-
-        requestAnimationFrame(() => {
-          lightbox.classList.add('active');
-        });
-
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', closeLightbox);
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') closeLightbox();
-        });
-      }
-
-      function closeLightbox() {
-        const lightbox = document.querySelector('.lightbox');
-        if (lightbox) {
-          lightbox.classList.remove('active');
-          setTimeout(() => {
-            lightbox.remove();
-          }, 300);
-        }
-      }
     </script>
   </body>
 </html>

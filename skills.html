@@ -3,456 +3,407 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <title>Skills — Nabil</title>
+  <meta name="description" content="Technologies and skills of Muhammad Syafwan Nabil — HTML, CSS, JavaScript, PHP, Laravel, MySQL, Flutter, and more." />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #ffffff;
-      --text: #000000;
+      --surface: #f7f7f7;
+      --surface2: #f0f0f0;
+      --text: #111111;
+      --text-muted: #666666;
       --active: #c8a27a;
-      --accent: #e8d5c0;
-      --gray: #666666;
+      --active-glow: rgba(200,162,122,0.2);
+      --active-dim: rgba(200,162,122,0.08);
+      --border: rgba(0,0,0,0.08);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Inter', system-ui, sans-serif;
     }
-
     body {
-      background: var(--bg);
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
+      background: var(--bg); color: var(--text);
+      overflow-x: hidden; min-height: 100vh;
     }
-
-    /* ANIMATED BACKGROUND */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(200, 162, 122, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(200, 162, 122, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      animation: bgShift 15s ease-in-out infinite;
-      z-index: 0;
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60vw 50vh at 15% 60%, rgba(200,162,122,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50vw 40vh at 90% 20%, rgba(200,162,122,0.04) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
     }
-
-    @keyframes bgShift {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.1); }
-    }
-
-    /* GRID PATTERN */
     body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(200, 162, 122, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200, 162, 122, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-      opacity: 0.5;
-      z-index: 0;
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,162,122,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,162,122,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
     }
 
-    /* TOP NAVIGATION */
+    /* NAV */
     .top-nav {
-      position: fixed;
-      top: 5vh;
-      right: 5vw;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      opacity: 0;
-      animation: fadeInDown 1s ease 0.5s forwards;
-      z-index: 100;
+      position: fixed; top: 5vh; right: 5vw;
+      display: flex; gap: 2rem; align-items: center;
+      opacity: 0; animation: fadeDown 0.8s ease 0.4s forwards; z-index: 100;
     }
-
     .back-btn {
-      font-size: clamp(0.7rem, 1vw, 0.85rem);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--active);
-      text-decoration: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 3px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--bg); background: var(--active);
+      text-decoration: none; padding: 0.55rem 1.4rem;
+      border-radius: 3px; border: 1.5px solid var(--active);
       transition: all 0.3s ease;
-      border: 2px solid var(--active);
     }
-
     .back-btn:hover {
-      background: transparent;
-      color: var(--active);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(200, 162, 122, 0.3);
+      background: transparent; color: var(--active);
+      transform: translateY(-2px); box-shadow: 0 8px 20px var(--active-glow);
     }
-
     .nav-link {
-      font-size: clamp(0.7rem, 1vw, 0.85rem);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--gray);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.3s ease;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none;
+      position: relative; transition: color 0.3s ease;
     }
-
     .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--active);
-      transition: width 0.3s ease;
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--active);
+      transition: width 0.35s ease;
     }
+    .nav-link:hover { color: var(--active); }
+    .nav-link:hover::after { width: 100%; }
 
-    .nav-link:hover {
-      color: var(--active);
-    }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(40px)}  to{opacity:1;transform:translateY(0)} }
 
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* MAIN CONTENT */
+    /* MAIN */
     .container {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 15vh 8vw 10vh;
-      z-index: 1;
+      position: relative; max-width: 1200px;
+      margin: 0 auto; padding: 16vh 8vw 10vh; z-index: 1;
+    }
+
+    .page-label {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .page-label-line { width: 24px; height: 1px; background: var(--active); }
+    .page-label-text {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--active);
     }
 
     .page-title {
-      font-size: clamp(4rem, 10vw, 7rem);
-      font-weight: 900;
-      color: var(--text);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease 0.8s forwards;
-      text-shadow: 
-        2px 2px 0 rgba(0,0,0,0.1),
-        4px 4px 0 rgba(0,0,0,0.08),
-        6px 6px 0 rgba(0,0,0,0.06),
-        8px 8px 20px rgba(0,0,0,0.15);
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 900; color: var(--text);
+      line-height: 0.95; letter-spacing: -0.02em;
+      opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+      margin-bottom: 4rem;
     }
 
-    .page-number {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-weight: 700;
-      color: var(--active);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease 0.6s forwards;
-    }
-
-    .skills-container {
-      margin-top: 4rem;
+    /* SKILL CATEGORIES */
+    .categories-wrapper {
+      display: flex; flex-direction: column; gap: 3.5rem;
     }
 
     .skill-category {
-      margin-bottom: 4rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
+      opacity: 0; animation: fadeUp 0.8s ease forwards;
     }
+    .skill-category:nth-child(1) { animation-delay: 0.9s; }
+    .skill-category:nth-child(2) { animation-delay: 1.1s; }
+    .skill-category:nth-child(3) { animation-delay: 1.3s; }
 
-    .skill-category:nth-child(1) { animation-delay: 1s; }
-    .skill-category:nth-child(2) { animation-delay: 1.2s; }
-    .skill-category:nth-child(3) { animation-delay: 1.4s; }
-
-    .category-title {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 2rem;
-      position: relative;
-      padding-bottom: 0.5rem;
+    .category-header {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 1.5rem;
     }
-
-    .category-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: var(--active);
+    .category-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--active-dim); border: 1px solid rgba(200,162,122,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: var(--active);
     }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-item {
-      background: var(--bg);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-      padding: 1.25rem 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .skill-item:hover {
-      border-color: var(--active);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    .skill-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-
-    .skill-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .skill-level {
-      font-size: 0.9rem;
-      font-weight: 600;
+    .skill-emoji { font-size: 1rem; color: var(--active); }
+    .icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.125em; fill: currentColor; }
+    .category-name {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--active);
     }
+    .category-line {
+      flex: 1; height: 1px; background: var(--border);
+    }
 
-    .skill-bar {
-      width: 100%;
-      height: 6px;
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 3px;
-      overflow: hidden;
+    /* SKILL CARDS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.5rem;
+      transition: all 0.35s cubic-bezier(0.19,1,0.22,1);
       position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--active-dim) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .skill-card:hover {
+      border-color: rgba(200,162,122,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(200,162,122,0.1);
+    }
+    .skill-card:hover::before { opacity: 1; }
+
+    .skill-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem; position: relative;
+    }
+    .skill-logo-wrap {
+      display: grid; place-items: center;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(200,162,122,0.18);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.35s cubic-bezier(0.19,1,0.22,1);
+    }
+    .skill-card:hover .skill-logo-wrap {
+      transform: translateY(-2px);
+      border-color: rgba(200,162,122,0.4);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+    .skill-logo {
+      width: 24px; height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+    .skill-logo-lg {
+      width: 32px; height: 32px;
+    }
+    .skill-badge {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--active);
+      background: var(--active-dim);
+      border: 1px solid rgba(200,162,122,0.15);
+      padding: 3px 10px; border-radius: 20px;
     }
 
-    .skill-progress {
-      height: 100%;
-      background: var(--active);
-      border-radius: 3px;
-      transition: width 1.5s cubic-bezier(0.19,1,0.22,1);
-      width: 0;
+    .skill-bar-track {
+      width: 100%; height: 3px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 2px; overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--active), #e8c9a0);
+      border-radius: 2px;
+      transition: width 1.6s cubic-bezier(0.19,1,0.22,1);
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(60px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* DECORATIVE NUMBER */
+    /* DECO */
     .number-deco {
-      position: fixed;
-      bottom: 5vh;
-      right: 5vw;
-      font-size: clamp(8rem, 15vw, 12rem);
-      font-weight: 900;
-      color: var(--accent);
-      opacity: 0.3;
-      line-height: 1;
-      pointer-events: none;
-      z-index: 1;
+      position: fixed; bottom: 5vh; right: 5vw;
+      font-size: clamp(7rem, 14vw, 11rem); font-weight: 900;
+      color: transparent; -webkit-text-stroke: 1px rgba(200,162,122,0.06);
+      line-height: 1; pointer-events: none; z-index: 0; user-select: none;
     }
 
     /* MOBILE */
     @media (max-width: 768px) {
-      .container {
-        padding: 12vh 5vw 5vh;
-      }
-
-      .top-nav {
-        top: 3vh;
-        right: 5vw;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-
-      .back-btn {
-        font-size: 0.65rem;
-        padding: 0.5rem 1rem;
-      }
-
-      .nav-link {
-        font-size: 0.65rem;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .number-deco {
-        display: none;
-      }
+      .container { padding: 14vh 5vw 8vh; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .number-deco { display: none; }
+      .top-nav { top: 3vh; right: 5vw; gap: 1rem; }
+      .back-btn { font-size: 0.65rem; padding: 0.45rem 1rem; }
     }
   </style>
+  <script src="lang.js" defer></script>
 </head>
 <body>
 
   <nav class="top-nav">
-    <a href="index.html" class="back-btn">← Back to Menu</a>
-    <a href="contact.html" class="nav-link">Resume</a>
-    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link">LinkedIn</a>
-    <a href="https://github.com/Shonabil" class="nav-link">GitHub</a>
+    <a href="index.html" class="back-btn">← Menu</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="https://www.linkedin.com/in/muhammad-syafwan-nabil-75a3003a6/" class="nav-link" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Shonabil" class="nav-link" target="_blank">GitHub</a>
   </nav>
 
   <div class="container">
-    <div class="page-number">04 — SKILLS</div>
-    <h1 class="page-title">EXPERTISE</h1>
+    <div class="page-label">
+      <span class="page-label-line"></span>
+      <span class="page-label-text" data-i18n="skl.label">04 — Skills</span>
+    </div>
+    <h1 class="page-title" data-i18n="skl.title">EXPERTISE.</h1>
 
-    <div class="skills-container">
+    <div class="categories-wrapper">
+
+      <!-- Frontend -->
       <div class="skill-category">
-        <h2 class="category-title">SKILLS</h2>
-        <div class="skills-grid">
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">HTML & CSS</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">JavaScript</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Tailwind</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
-          </div>
+        <div class="category-header">
+          <div class="category-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <span class="category-name">Frontend</span>
+          <div class="category-line"></div>
         </div>
-      </div>
-      <div class="skill-category">
         <div class="skills-grid">
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Laravel</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/html.png" class="skill-logo skill-logo-lg" alt="HTML" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="92"></div></div>
           </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">MySQL</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/css.png" class="skill-logo" alt="CSS" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="90"></div></div>
           </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">PHP</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/js.png" class="skill-logo skill-logo-lg" alt="JavaScript" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="85"></div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/tailwind.png" class="skill-logo" alt="Tailwind CSS" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="88"></div></div>
           </div>
         </div>
       </div>
 
+      <!-- Backend -->
       <div class="skill-category">
+        <div class="category-header">
+          <div class="category-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <span class="category-name" data-i18n="skl.cat.backend">Backend &amp; Database</span>
+          <div class="category-line"></div>
+        </div>
         <div class="skills-grid">
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Git & GitHub</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/php.png" class="skill-logo" alt="PHP" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="90"></div></div>
           </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Flutter</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/laravel.png" class="skill-logo" alt="Laravel" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="88"></div></div>
           </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">REST APIs</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/mysql.png" class="skill-logo" alt="MySQL" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="85"></div></div>
           </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">API Development</span>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/api.png" class="skill-logo" alt="REST API" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
             </div>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="100"></div>
-            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="90"></div></div>
           </div>
         </div>
       </div>
+
+      <!-- Tools & Mobile -->
+      <div class="skill-category">
+        <div class="category-header">
+          <div class="category-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <span class="category-name">Tools &amp; Mobile</span>
+          <div class="category-line"></div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/github.png" class="skill-logo" alt="Git & GitHub" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.adv">Advanced</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="88"></div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/flutter.png" class="skill-logo" alt="Flutter" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.int">Intermediate</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="70"></div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-top">
+              <div class="skill-logo-wrap">
+                <img src="logo/api.png" class="skill-logo" alt="API Development" />
+              </div>
+              <span class="skill-badge" data-i18n="skl.int">Intermediate</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-progress="85"></div></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <div class="number-deco">04</div>
 
   <script>
-    // Animate skill bars on scroll
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: '0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const progressBars = entry.target.querySelectorAll('.skill-progress');
-          progressBars.forEach(bar => {
-            const progress = bar.getAttribute('data-progress');
-            setTimeout(() => {
-              bar.style.width = progress + '%';
-            }, 200);
-          });
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        const fills = entry.target.querySelectorAll('.skill-bar-fill');
+        fills.forEach(fill => {
+          setTimeout(() => {
+            fill.style.width = fill.dataset.progress + '%';
+          }, 100);
+        });
+        observer.unobserve(entry.target);
       });
-    }, observerOptions);
+    }, { threshold: 0.2 });
 
-    document.querySelectorAll('.skill-category').forEach(category => {
-      observer.observe(category);
-    });
+    document.querySelectorAll('.skill-category').forEach(cat => observer.observe(cat));
   </script>
 
 </body>
