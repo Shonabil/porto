@@ -222,6 +222,16 @@
       transform: translateX(-60px);
       animation: wordSlideIn 0.9s cubic-bezier(0.19,1,0.22,1) forwards;
     }
+
+    /* Area klik rata (tidak ikut transform 3D) */
+    .word-wrapper > div > a {
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+      /* Tetap di atas tetangga supaya klik tidak jatuh ke menu lain */
+      position: relative;
+      z-index: 2;
+    }
     .word-wrapper:nth-child(1) { animation-delay: 0.5s; }
     .word-wrapper:nth-child(2) { animation-delay: 0.65s; }
     .word-wrapper:nth-child(3) { animation-delay: 0.8s; }
@@ -254,6 +264,9 @@
       transform-origin: left center;
       transform: perspective(1400px) translateZ(-20px) rotateY(0deg);
       transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+      /* Elemen ini di-transform 3D, jadi hit-testing-nya miring & bisa
+         tumpang tindih dengan menu tetangga. Klik ditangani oleh <a>. */
+      pointer-events: none;
     }
     .word-wrapper:hover .word-container {
       transform: perspective(1400px) translateZ(70px) rotateY(6deg);
@@ -868,7 +881,7 @@
         <span class="word-number">01</span>
         <div style="position:relative;">
           <span class="line-accent"></span>
-          <a href="home.html" style="text-decoration:none;color:inherit;">
+          <a href="home.html">
             <div class="word-container">
               <div class="word" data-i18n="idx.word.home">HOME</div>
             </div>
@@ -881,7 +894,7 @@
         <span class="word-number">02</span>
         <div style="position:relative;">
           <span class="line-accent"></span>
-          <a href="about.html" style="text-decoration:none;color:inherit;">
+          <a href="about.html">
             <div class="word-container">
               <div class="word" data-i18n="idx.word.about">ABOUT</div>
             </div>
@@ -894,7 +907,7 @@
         <span class="word-number">03</span>
         <div style="position:relative;">
           <span class="line-accent"></span>
-          <a href="projects.html" style="text-decoration:none;color:inherit;">
+          <a href="projects.html">
             <div class="word-container">
               <div class="word" data-i18n="idx.word.projects">PROJECTS</div>
             </div>
@@ -907,7 +920,7 @@
         <span class="word-number">04</span>
         <div style="position:relative;">
           <span class="line-accent"></span>
-          <a href="skills.html" style="text-decoration:none;color:inherit;">
+          <a href="skills.html">
             <div class="word-container">
               <div class="word" data-i18n="idx.word.skills">SKILLS</div>
             </div>
@@ -920,7 +933,7 @@
         <span class="word-number">05</span>
         <div style="position:relative;">
           <span class="line-accent"></span>
-          <a href="contact.html" style="text-decoration:none;color:inherit;">
+          <a href="contact.html">
             <div class="word-container">
               <div class="word" data-i18n="idx.word.contact">CONTACT</div>
             </div>
